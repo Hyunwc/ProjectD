@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
 
     int jumpCount; //점프 횟수
 
+    
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     // Start is called before the first frame update
     void Start()
