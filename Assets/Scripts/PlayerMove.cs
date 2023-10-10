@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false; //마우스 커서 숨기기
+        Cursor.lockState = CursorLockMode.Locked;   //마우스 커서 고정
         //플레이어의 rigidboyd컴포넌트 가져와서 저장
         rb = GetComponent<Rigidbody>();
     }
@@ -25,6 +27,7 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
     }
+
 
     void Move()
     {
