@@ -40,9 +40,18 @@ public class Enemy : MonoBehaviour
         //agent.isStopped = true; //이동 중단
         //agent.ResetPath(); //경로 초기화
         //체력이 남아있다면 피격상태로
-        if(hp > 0)
+        if (hp > 0)
         {
-            eState = EnemyState.Damaged;
+            if (eState == EnemyState.Idle)
+            {
+                eState = EnemyState.Walk;
+                agent.isStopped = false;
+                agent.SetDestination(player.position);
+            }
+            else
+            {
+                eState = EnemyState.Damaged;
+            }
         }
         else{
             //eState = EnemyState.Dead;
@@ -88,6 +97,7 @@ public class Enemy : MonoBehaviour
             //걷기 상태로
             eState = EnemyState.Walk;
             agent.isStopped = false; //이동 시작
+            agent.SetDestination(player.position); // 목적지 설정
         }
     }
     void Walk()
