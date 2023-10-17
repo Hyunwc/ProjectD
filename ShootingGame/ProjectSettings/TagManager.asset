@@ -8,6 +8,7 @@ TagManager:
   - Item
   - FlashLight
   - Enemy
+  - CO2
   layers:
   - Default
   - TransparentFX
