@@ -25,6 +25,8 @@ public class ActionController : MonoBehaviour
 
     private bool state = false;
 
+    public Slider hpBar;
+
     void Update()
     {
         CheckItem(); // 아이템 확인
@@ -44,10 +46,15 @@ public class ActionController : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
-            if (hitInfo.transform.tag == "Item" | hitInfo.transform.tag == "FlashLight" ) // tag가 Item인 경우에만 획득 가능하다는 text 출력
+            if (hitInfo.transform.tag == "Item" | hitInfo.transform.tag == "FlashLight" | hitInfo.transform.tag == "Medicine") // tag가 Item인 경우에만 획득 가능하다는 text 출력
             {
                 ItemInfoAppear();
-            }
+                /*if (hitInfo.transform.tag == "Medicine") // 만약 Medicine이 들어오면 hp 회복
+                {
+                    hpBar.value += 15;
+
+                } */
+            } 
         }
         else
             ItemInfoDisappear(); // Item이 아닐 시 text 출력x
