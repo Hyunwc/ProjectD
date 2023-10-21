@@ -10,14 +10,18 @@ public class PlayerMove : MonoBehaviour
 
     int jumpCount; //점프 횟수
 
+    public PlayerFire gun;
+
     
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     // Start is called before the first frame update
     void Start()
     {
-       
+        Cursor.visible = false; //마우스 커서 숨기기
+        Cursor.lockState = CursorLockMode.Confined;   //마우스 커서가 게임 화면 못 벗어나게
         //플레이어의 rigidboyd컴포넌트 가져와서 저장
         rb = GetComponent<Rigidbody>();
+        //gun = GetComponent<PlayerFire>();
     }
 
     // Update is called once per frame
@@ -25,6 +29,10 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         Jump();
+        if(Input.GetMouseButtonDown(0))
+        {
+            gun.Shot();
+        }
     }
 
 
