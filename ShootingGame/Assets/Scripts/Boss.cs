@@ -21,8 +21,9 @@ public class Boss : MonoBehaviour
     public float hp = 2000; //보스체력
     public Slider hpBar; //보스 체력바
     public float speed = 3.0f;
-
+    public GameObject bossBullet;
     private Rigidbody bossRb;
+    private float bulletSpeed = 10f;
 
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
@@ -45,10 +46,6 @@ public class Boss : MonoBehaviour
                 agent.isStopped = false;
                 agent.SetDestination(player.position);
             }
-            //else
-            //{
-            //    bossState = BossState.Damaged;
-            //}
         }
         else
         {
@@ -60,6 +57,7 @@ public class Boss : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
+        //InvokeRepeating("AttackPlayer", 5f, 5f);
     }
 
     // Update is called once per frame
@@ -121,4 +119,15 @@ public class Boss : MonoBehaviour
             agent.isStopped = false; //이동시작
         }
     }
+
+    //void AttackPlayer()
+    //{
+    //    Instantiate(bossBullet, transform.position, Quaternion.identity);
+    //    // 방향을 설정합
+    //    Vector3 direction = (player.position - transform.position).normalized;
+    //    // 발사력을 적용
+    //    bossBullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+
+    //    Destroy(bossBullet, 5f);
+    //}    
 }
