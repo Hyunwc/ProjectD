@@ -722,7 +722,8 @@ MonoBehaviour:
   hp: 500
   hpBar: {fileID: 697066347}
   speed: 4
-  bossBullet: {fileID: 3058495892426348566, guid: 33c6a602047ef3043963701f41d022e6, type: 3}
+  bulletPref: {fileID: 3058495892426348566, guid: 33c6a602047ef3043963701f41d022e6, type: 3}
+  firePower: 10
 --- !u!195 &452562837
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1156,7 +1157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 586251267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.332, z: -0.247}
+  m_LocalPosition: {x: 0.008, y: 0.332, z: -0.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1494,9 +1495,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1000
+  m_MaxValue: 500
   m_WholeNumbers: 0
-  m_Value: 1000
+  m_Value: 500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3297,7 +3298,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1448905964}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.017449792, y: -0.017449792, z: -0.000304588, w: 0.9996954}
   m_LocalPosition: {x: 0.49, y: 0.5, z: 0.59}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -3305,7 +3306,7 @@ Transform:
   - {fileID: 1745002532}
   m_Father: {fileID: 1900079790}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2, y: -2, z: 0}
 --- !u!65 &1448905966
 BoxCollider:
   m_ObjectHideFlags: 0

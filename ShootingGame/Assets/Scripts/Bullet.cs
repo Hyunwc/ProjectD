@@ -6,14 +6,14 @@ public class Bullet : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Enemy"))
-        {
-            other.gameObject.SendMessage("Damaged", 20);
+        //if(other.gameObject.CompareTag("Enemy"))
+        //{
+        //    other.gameObject.SendMessage("Damaged", 20);
 
-            Destroy(gameObject);
-        }
+        //    Destroy(gameObject);
+        //}
 
-        else if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.SendMessage("Damaged", 10);
 
