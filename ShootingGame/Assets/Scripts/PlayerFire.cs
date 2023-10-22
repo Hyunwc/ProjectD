@@ -40,12 +40,6 @@ public class PlayerFire : MonoBehaviour
         }
 
         StartCoroutine(ShotEffect(hitPosition));
-
-        //if (hit.transform != null)
-        //{
-           
-        //}
-    
     }
 
     //총알 발사 업데이트 함수

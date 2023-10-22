@@ -21,10 +21,13 @@ public class Boss : MonoBehaviour
     public float hp = 2000; //보스체력
     public Slider hpBar; //보스 체력바
     public float speed = 3.0f;
-    public GameObject bossBullet;
+    //public GameObject bossBullet;
     private Rigidbody bossRb;
-    private float bulletSpeed = 10f;
+    //private float bulletSpeed = 10f;
 
+    //총알 프리팹을 담아둘 변수
+    public GameObject bulletPref;
+    public float firePower = 10f;
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
@@ -57,7 +60,7 @@ public class Boss : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
-        //InvokeRepeating("AttackPlayer", 5f, 5f);
+        InvokeRepeating("AttackPlayer", 2f, 2f);
     }
 
     // Update is called once per frame
@@ -120,14 +123,22 @@ public class Boss : MonoBehaviour
         }
     }
 
-    //void AttackPlayer()
-    //{
-    //    Instantiate(bossBullet, transform.position, Quaternion.identity);
-    //    // 방향을 설정합
-    //    Vector3 direction = (player.position - transform.position).normalized;
-    //    // 발사력을 적용
-    //    bossBullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed;
+    void AttackPlayer()
+    {
 
-    //    Destroy(bossBullet, 5f);
-    //}    
+        // 플레이어를 바라보도록 회전시킵니다.
+        Vector3 direction = (player.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
+
+        // 불렛 생성 후 발사합니다.
+        GameObject bullet = Instantiate(bulletPref, transform.position + transform.forward, Quaternion.identity);
+        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower, ForceMode.Impulse);
+        ////플레이어의 위치보다 1 앞에, 벡터가아닌 transform인 이유는 회전할때도 올바른 위치에 생성되게 하기 위함
+        ////생성 후 bullet 변수에 할당
+        //GameObject bullet = Instantiate(bulletPref, transform.position + transform.forward, Quaternion.identity);
+
+        ////총알 프리팹이 앞으로 날아가는 순간적인 힘 발생
+        //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower, ForceMode.Impulse);
+    }
 }

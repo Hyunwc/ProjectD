@@ -63,7 +63,7 @@ public class PlayerMove : MonoBehaviour
     void Jump()
     {
         //스페이스 누른 순간, 점프 횟수가 2회 미만이라면
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 1)
         {
             //위로 순간적인 힘 발생
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
