@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed; //이동 속도
     public float jumpPower; //점프힘
     public float rotateSpeed; //회전속도
+    public GameObject subMenu; //서브메뉴
 
     int jumpCount; //점프 횟수
 
@@ -18,7 +19,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         Cursor.visible = false; //마우스 커서 숨기기
-        Cursor.lockState = CursorLockMode.Confined;   //마우스 커서가 게임 화면 못 벗어나게
+        Cursor.lockState = CursorLockMode.Locked;   //마우스 커서가 게임 화면 못 벗어나게
         //플레이어의 rigidboyd컴포넌트 가져와서 저장
         rb = GetComponent<Rigidbody>();
         //gun = GetComponent<PlayerFire>();
@@ -32,6 +33,24 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             gun.Shot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            subMenu.SetActive(true);
+            //플레이어 기능 중단
+            GetComponent<PlayerMove>().enabled = false; //움직임 중지
+            //GetComponent<PlayerFire>().enabled = false; //사격 중지
+            GetComponentInChildren<CameraRotate>().enabled = false;  //카메라 회전 중지
+
+            //게임 내의 모든 적의 기능 중단
+            Enemy[] enemies = FindObjectsOfType<Enemy>();
+            foreach (var enemy in enemies)
+            {
+                enemy.enabled = false;
+            }
         }
     }
 
