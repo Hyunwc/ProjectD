@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraRotate : MonoBehaviour
 {
     public float rotateSpeed; //회전 속도
+    public GameObject gun; // 건 오브젝트
 
     //eulerAngles.x의 값을 담아둘 변수
     float tempX;
@@ -40,5 +41,11 @@ public class CameraRotate : MonoBehaviour
         tempX = Mathf.Clamp(tempX, -45, 45);
         //제한된 값을 eulerAngles.x에 적용
         transform.eulerAngles = new Vector3(tempX, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        //자식 오브젝트도 함께 회전
+        if(gun != null)
+        {
+            gun.transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
     }
 }
