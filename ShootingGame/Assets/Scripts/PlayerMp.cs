@@ -9,12 +9,12 @@ public class PlayerMp : MonoBehaviour
     public float mp = 0;
     public Slider mpBar;
     public Slider hpBar;
-    public float[] co2s = { 1.0f, 1.5f, 2.0f };
-    float index = 0;
+    public float[] co2s = { 0.5f, 0.05f, 0.1f };
+   
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "CO2")
+        if (other.tag == "CO2") // CO2와 충돌시 
         {
             StartCoroutine(CO2zone());
         }
@@ -25,22 +25,22 @@ public class PlayerMp : MonoBehaviour
         mp += Time.deltaTime;
         mpBar.value = mp;
 
-        if (mp >= 30 && mp <= 50)
+        if (mp >= 30 && mp <= 50) // 30 ~ 50 구간 피 감소
         {
             hpBar.value -= Time.deltaTime;
-            Debug.Log("30");
+            ///Debug.Log("30");
         }
-        else if (mp >= 50 && mp <= 70)
+        else if (mp >= 50 && mp <= 70) // 50 ~ 70 구간 피 감소
         {
             hpBar.value -= co2s[1];
-            yield return new WaitForSeconds(2.0f);
-            Debug.Log("50");
+            yield return new WaitForSeconds(0.6f);
+            //Debug.Log("50");
         }
-        else if (mp >= 70 && mp <= 100)
+        else if (mp >= 70 && mp <= 100) // 70 ~ 100 구간 피 감소
         {
             hpBar.value -= co2s[2];
-            yield return new WaitForSeconds(2.0f);
-            Debug.Log("70");
+            yield return new WaitForSeconds(0.7f);
+            //Debug.Log("70");
         }
     }
 }

@@ -5,27 +5,19 @@ using UnityEngine.UI;
 
 public class ActionController : MonoBehaviour
 {
-    [SerializeField]
-    private float range;  // 아이템 습득이 가능한 최대 거리
+    [SerializeField] private float range;  // 아이템 습득이 가능한 최대 거리
+    [SerializeField] private LayerMask layerMask;  // 특정 레이어를 가진 오브젝트만 획득.
+    [SerializeField] private Text actionText;  // 행동을 보여 줄 텍스트
+    [SerializeField] private Inventory theInventory;  // Inventory 스크립트
 
     private bool pickupActivated = false;  // 아이템 습득 가능할시 True 
-
     private RaycastHit hitInfo;  // 충돌체 정보 저장
-
-    [SerializeField]
-    private LayerMask layerMask;  // 특정 레이어를 가진 오브젝트만 획득.
-
-    [SerializeField]
-    private Text actionText;  // 행동을 보여 줄 텍스트
-
-    [SerializeField]
-    private Inventory theInventory;  // Inventory 스크립트
-
     public GameObject handle;
-
     private bool state = false;
-
     public Slider hpBar;
+
+    private GameObject fireExt;
+    public GameObject FireExtPanel;
 
     void Update()
     {
@@ -46,21 +38,16 @@ public class ActionController : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
-            if (hitInfo.transform.tag == "Item" | hitInfo.transform.tag == "FlashLight" | hitInfo.transform.tag == "Medicine") // tag가 Item인 경우에만 획득 가능하다는 text 출력
+            if (hitInfo.transform.tag == "Item" | hitInfo.transform.tag == "FlashLight" | hitInfo.transform.tag == "Medicine") // 해당하는 tag의 경우에만 획득 가능하다는 text 출력, CompareTag("")
             {
                 ItemInfoAppear();
-                /*if (hitInfo.transform.tag == "Medicine") // 만약 Medicine이 들어오면 hp 회복
-                {
-                    hpBar.value += 15;
-
-                } */
             } 
         }
         else
             ItemInfoDisappear(); // Item이 아닐 시 text 출력x
     }
 
-    private void ItemInfoAppear()
+    private void ItemInfoAppear() // 아이템 정보 text 출력 
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
@@ -73,7 +60,6 @@ public class ActionController : MonoBehaviour
         actionText.gameObject.SetActive(false);
     }
 
-
     private void CanPickUp()
     {
         if (pickupActivated)
@@ -81,10 +67,16 @@ public class ActionController : MonoBehaviour
             if (hitInfo.transform != null)
             {
                 Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 했습니다."); // 인벤토리 넣기
-                if (hitInfo.transform.tag == "FlashLight") // Tag가 FlashLight 일 때, 플레이어의 FlashLight를 활성화
+                if (hitInfo.transform.CompareTag("FlashLight")) // Tag가 FlashLight 일 때, 플레이어의 FlashLight를 활성화
                 {
                     state = true;
                     handle.gameObject.SetActive(true);
+                } else if (hitInfo.transform.CompareTag("Medicine")) // tag가 Medicine 일 때, 획득시 hp 15회복
+                {
+                    hpBar.value += 15;
+                }  else if (GameObject.Find("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
+                {
+                    FireExtPanel.SetActive(true);
                 }
                 theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
                 Destroy(hitInfo.transform.gameObject);

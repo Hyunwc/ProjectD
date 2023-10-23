@@ -30,8 +30,8 @@ public class Slot : MonoBehaviour
     // 해당 슬롯의 아이템 업데이트
     public void SetSlotCount(int _count)
     {
-        // itemCount += _count; // 아이템 갯수 업데이트
-        // text_Count.text = itemCount.ToString();
+        itemCount += _count; // 아이템 갯수 업데이트
+        //text_Count.text = itemCount.ToString();
 
         if (itemCount <= 0) // 아이템이 없을 때
             ClearSlot();

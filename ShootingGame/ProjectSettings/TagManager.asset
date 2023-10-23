@@ -9,6 +9,7 @@ TagManager:
   - FlashLight
   - Enemy
   - CO2
+  - Medicine
   layers:
   - Default
   - TransparentFX
