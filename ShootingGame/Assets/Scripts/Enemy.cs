@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
         Damaged, //피격
         Dead // 죽음
     }
-
+    
     //상태를 담아둘 변수, 기본 상태로 시작
     public EnemyState eState = EnemyState.Idle;
     public float hp = 100; //적체력
@@ -48,11 +48,12 @@ public class Enemy : MonoBehaviour
                 agent.isStopped = false;
                 agent.SetDestination(player.position);
             }
-            else
-            {
-                eState = EnemyState.Damaged;
-            }
+            //else
+            //{
+            //    eState = EnemyState.Damaged;
+            //}
         }
+        //hp가 0이면 오브젝트 파괴
         else{
             //eState = EnemyState.Dead;
             Destroy(gameObject);
@@ -94,6 +95,7 @@ public class Enemy : MonoBehaviour
         //플레이어와의 거리가 8 이하라면
         if(distance <= 8)
         {
+            Debug.Log("추적");
             //걷기 상태로
             eState = EnemyState.Walk;
             agent.isStopped = false; //이동 시작
@@ -105,12 +107,14 @@ public class Enemy : MonoBehaviour
         //8보다 크다면
         if(distance > 8)
         {
+            Debug.Log("정지");
             eState = EnemyState.Idle;
             agent.isStopped = true; //이동 중단
             agent.ResetPath(); //경로 초기화
         }
         else if(distance <= 0.5)
         {
+            Debug.Log("공격");
             eState = EnemyState.Attack; //공격상태로
             agent.isStopped = true; //이동 중단
             agent.ResetPath(); //경로 초기화

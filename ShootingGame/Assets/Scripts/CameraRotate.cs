@@ -5,28 +5,22 @@ using UnityEngine;
 public class CameraRotate : MonoBehaviour
 {
     public float rotateSpeed; //회전 속도
+    public GameObject gun; // 건 오브젝트
 
     //eulerAngles.x의 값을 담아둘 변수
     float tempX;
-    bool isFirstMove = true; //초기 움직임 여부
+    
     // Update is called once per frame
     void Update()
     {
         //마우스의 위아래 움직임 입력을 숫자로 받아서 저장
         float mouseMoveY = Input.GetAxis("Mouse Y");
 
-        if (isFirstMove)
+        if (Mathf.Approximately(mouseMoveY, 0))
         {
-            // 초기 움직임이면 무시하고 리턴
-            if (Mathf.Approximately(mouseMoveY, 0))
-            {
-                return;
-            }
-            else
-            {
-                isFirstMove = false; // 초기 움직임이 아니라면 체크 해제
-            }
+            return;
         }
+        
         //마우스가 움직인 만큼 X축 회전
         transform.Rotate(-mouseMoveY * rotateSpeed * Time.deltaTime, 0, 0);
 
@@ -37,7 +31,7 @@ public class CameraRotate : MonoBehaviour
             tempX = transform.eulerAngles.x - 360;
         }
         //x의 각도가 180을 넘지 않는다면
-        else 
+        else
         {
             //그대로 저장
             tempX = transform.eulerAngles.x;
@@ -47,5 +41,11 @@ public class CameraRotate : MonoBehaviour
         tempX = Mathf.Clamp(tempX, -45, 45);
         //제한된 값을 eulerAngles.x에 적용
         transform.eulerAngles = new Vector3(tempX, transform.eulerAngles.y, transform.eulerAngles.z);
+
+        //자식 오브젝트도 함께 회전
+        if(gun != null)
+        {
+            gun.transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
     }
 }

@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - CO2
   - Medicine
+  - FireExt
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,6 @@ public class ActionController : MonoBehaviour
     private bool state = false;
     public Slider hpBar;
 
-    private GameObject fireExt;
     public GameObject FireExtPanel;
 
     void Update()
@@ -38,7 +37,7 @@ public class ActionController : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
-            if (hitInfo.transform.tag == "Item" | hitInfo.transform.tag == "FlashLight" | hitInfo.transform.tag == "Medicine") // 해당하는 tag의 경우에만 획득 가능하다는 text 출력, CompareTag("")
+            if (hitInfo.transform.tag != null) // 해당하는 tag의 경우에만 획득 가능하다는 text 출력, CompareTag("")
             {
                 ItemInfoAppear();
             } 
@@ -74,7 +73,7 @@ public class ActionController : MonoBehaviour
                 } else if (hitInfo.transform.CompareTag("Medicine")) // tag가 Medicine 일 때, 획득시 hp 15회복
                 {
                     hpBar.value += 15;
-                }  else if (GameObject.Find("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
+                }  else if (hitInfo.transform.CompareTag("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
                 {
                     FireExtPanel.SetActive(true);
                 }
