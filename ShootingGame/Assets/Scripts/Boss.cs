@@ -13,12 +13,13 @@ public class Boss : MonoBehaviour
         Idle, //기본
         Walk, //이동
         Attack, //공격
-        Damaged //피격
+        Damaged, //피격
+        Special //필살기
     }
 
     //상태를 담아둘 변수, 기본 상태로 시작
     public BossState bossState = BossState.Idle;
-    public float hp = 2000; //보스체력
+    public float hp = 500; //보스체력
     public Slider hpBar; //보스 체력바
     public float speed = 3.0f;
     //public GameObject bossBullet;
@@ -80,7 +81,7 @@ public class Boss : MonoBehaviour
     void Idle()
     {
         //플레이어와의 거리가 8 이하라면
-        if (distance <= 8)
+        if (distance <= 30)
         {
             //걷기 상태로
             bossState = BossState.Walk;
@@ -92,7 +93,7 @@ public class Boss : MonoBehaviour
     void Walk()
     {
         //플레이어와 8이상 떨어지면
-        if (distance > 8)
+        if (distance > 30)
         {
             //기본상태로 변경
             bossState = BossState.Idle;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,7 +14,11 @@ public class PlayerMove : MonoBehaviour
 
     public PlayerFire gun;
 
-    
+    private float gunCount; //남은 총알
+    //private float maxgunCount = 8; //최대 총알
+    public bool isReload = false; //재장전중인지 재장전중이면 true
+    public Text bulletCountText; //총알수 표시
+
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     // Start is called before the first frame update
     void Start()
@@ -22,6 +27,7 @@ public class PlayerMove : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;   //마우스 커서가 게임 화면 못 벗어나게
         //플레이어의 rigidboyd컴포넌트 가져와서 저장
         rb = GetComponent<Rigidbody>();
+        gunCount = 8;
         //gun = GetComponent<PlayerFire>();
     }
 
@@ -30,9 +36,18 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         Jump();
-        if(Input.GetMouseButtonDown(0))
+        //총알수가 0보다 크고 재장전상태가 아닐때
+        if (Input.GetMouseButtonDown(0) && gunCount > 0 && !isReload)
         {
             gun.Shot();
+            gunCount--;
+            UpdateBulletUI();
+            Debug.Log("현재 총알수 : " + gunCount);
+        }
+
+        if (gunCount >= 0)
+        {
+            Reload();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -99,5 +114,35 @@ public class PlayerMove : MonoBehaviour
             //점프횟수 초기화
             jumpCount = 0;
         }
+    }
+    //재장전
+    public void Reload()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("재장전 실행");
+            StartCoroutine(ReloadCoroutine());
+            isReload = true;
+        }
+    }
+
+    public IEnumerator ReloadCoroutine()
+    {
+
+        isReload = true;
+        yield return new WaitForSeconds(3f);
+        Debug.Log("총알 8발로 장전");
+        gunCount = 8;
+        UpdateBulletUI(); // 장전 후에 UI 업데이트
+        Debug.Log("장전 후 총일 : " + gunCount);
+        // 코루틴이 실행되고 난 후에 isReload를 false로 설정하여 재장전이 끝났음을 표시합니다.
+        isReload = false;
+        Debug.Log(isReload);
+        // 코루틴 종료
+    }
+
+    void UpdateBulletUI()
+    {
+        bulletCountText.text = "현재 총알 : \n " + gunCount + "/ 8";
     }
 }
