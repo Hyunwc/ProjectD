@@ -10,12 +10,14 @@ public class ClickManager : MonoBehaviour
     public GameObject player;
     public void ClickStart()
     {
+        Time.timeScale = 1;
         //클릭시 게임씬으로 시작
         SceneManager.LoadScene("Game");
     }
 
     public void ClickContinue()
     {
+        Time.timeScale = 1;
         subMenu.SetActive(false);
         Cursor.visible = false; //마우스 커서 숨기기
         Cursor.lockState = CursorLockMode.Locked;   //마우스 커서가 게임 화면 못 벗어나게
@@ -34,6 +36,7 @@ public class ClickManager : MonoBehaviour
 
     public void ClickExit()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Start");
     }
 }

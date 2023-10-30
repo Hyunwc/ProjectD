@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PlayerHp : MonoBehaviour
 {
     public float hp = 100; //플레이어 체력
     public Slider hpBar; //플레이어의 체력바
 
     public GameObject diePanel;
+    public GameObject ClearPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -26,18 +27,33 @@ public class PlayerHp : MonoBehaviour
         if (hp <= 0)
         {
             diePanel.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             //플레이어 기능 중단
-            GetComponent<PlayerMove>().enabled = false; //움직임 중지
-            GetComponent<PlayerFire>().enabled = false; //사격 중지
-            GetComponentInChildren<CameraRotate>().enabled = false;  //카메라 회전 중지
+            //GetComponent<PlayerMove>().enabled = false; //움직임 중지
+            //GetComponent<PlayerFire>().enabled = false; //사격 중지
+            //GetComponentInChildren<CameraRotate>().enabled = false;  //카메라 회전 중지
 
-            //게임 내의 모든 적의 기능 중단
-            Enemy[] enemies = FindObjectsOfType<Enemy>();
-            foreach(var enemy in enemies)
-            {
-                enemy.enabled = false;
-            }
+            ////게임 내의 모든 적의 기능 중단
+            //Enemy[] enemies = FindObjectsOfType<Enemy>();
+            //foreach(var enemy in enemies)
+            //{
+            //    enemy.enabled = false;
+            //}
+            Time.timeScale = 0;
+            
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Exit"))
+        {
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            ClearPanel.SetActive(true);
+        }
+    }
+
 }

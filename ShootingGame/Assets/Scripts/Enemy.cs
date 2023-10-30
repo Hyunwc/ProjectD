@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
+
+    
    // private GameObject player;
 
     void Damaged(float damage)
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour
         else{
             //eState = EnemyState.Dead;
             Destroy(gameObject);
+            
         }
     }
     // Start is called before the first frame update
