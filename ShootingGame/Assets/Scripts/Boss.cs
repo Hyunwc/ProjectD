@@ -32,6 +32,8 @@ public class Boss : MonoBehaviour
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
+    public GameObject ExitCube;
+    
     void Damaged(float damage)
     {
         //공격 받은만큼 체력 감소
@@ -55,6 +57,8 @@ public class Boss : MonoBehaviour
         {
             //eState = EnemyState.Dead;
             Destroy(gameObject);
+            ExitCube.SetActive(false);
+         
         }
     }
     void Start()

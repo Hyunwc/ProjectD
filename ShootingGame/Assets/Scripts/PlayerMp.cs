@@ -8,7 +8,7 @@ public class PlayerMp : MonoBehaviour
     public Slider mpBar;
     public Slider hpBar;
     public float[] co2s = { 0.5f, 0.05f, 0.1f };
-
+    public GameObject Co2Panel;
     void Start()
     {
         mpBar.value = mp;
@@ -18,7 +18,12 @@ public class PlayerMp : MonoBehaviour
     {
         if (other.CompareTag("CO2")) // CO2와 충돌시 
         {
+            Co2Panel.SetActive(true);
             StartCoroutine(CO2zone());
+        }
+        else
+        {
+            Co2Panel.SetActive(false);
         }
     }
 

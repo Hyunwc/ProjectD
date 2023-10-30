@@ -11,6 +11,7 @@ TagManager:
   - CO2
   - Medicine
   - FireExt
+  - Exit
   layers:
   - Default
   - TransparentFX
