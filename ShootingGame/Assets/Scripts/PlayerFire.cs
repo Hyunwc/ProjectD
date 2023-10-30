@@ -11,11 +11,14 @@ public class PlayerFire : MonoBehaviour
     //ÃÑ¾Ë ±ËÀû ±×¸®±â À§ÇÑ ·»´õ·¯
     private LineRenderer lineRenderer;
     private float fireDistance = 100f;
+
+    public AudioClip shotClip;
+    private AudioSource gunAudio;
     // Start is called before the first frame update
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-
+        gunAudio = GetComponent<AudioSource>();
         lineRenderer.enabled = false;
         lineRenderer.positionCount = 2;
     }
@@ -25,7 +28,7 @@ public class PlayerFire : MonoBehaviour
        
         RaycastHit hit;
         Vector3 hitPosition = Vector3.zero;
-
+        gunAudio.PlayOneShot(shotClip, 1.0f);
         if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance))
         {
             if (hit.transform.tag == "Enemy")

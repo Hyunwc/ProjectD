@@ -19,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     public bool isReload = false; //재장전중인지 재장전중이면 true
     public Text bulletCountText; //총알수 표시
 
+    public AudioClip ReloadClip;
+    private AudioSource playerAudio;
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,7 @@ public class PlayerMove : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;   //마우스 커서가 게임 화면 못 벗어나게
         //플레이어의 rigidboyd컴포넌트 가져와서 저장
         rb = GetComponent<Rigidbody>();
+        playerAudio = GetComponent<AudioSource>();
         gunCount = 8;
         //gun = GetComponent<PlayerFire>();
     }
@@ -128,9 +131,9 @@ public class PlayerMove : MonoBehaviour
 
     public IEnumerator ReloadCoroutine()
     {
-
         isReload = true;
         yield return new WaitForSeconds(3f);
+        playerAudio.PlayOneShot(ReloadClip, 1.0f);
         Debug.Log("총알 8발로 장전");
         gunCount = 8;
         UpdateBulletUI(); // 장전 후에 UI 업데이트
