@@ -5,6 +5,13 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject particlePrefab; //폭발 파티클
+    public AudioClip boomClip;
+    private AudioSource bulletAudio;
+
+    private void Start()
+    {
+        bulletAudio = GetComponent<AudioSource>();
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -16,7 +23,7 @@ public class Bullet : MonoBehaviour
 
             // 파티클이 재생된 후에 파괴합니다.
             Destroy(particle, particle.GetComponent<ParticleSystem>().main.duration);
-
+            bulletAudio.PlayOneShot(boomClip, 1.0f);
             Destroy(gameObject);
 
         }
