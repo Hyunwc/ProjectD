@@ -22,7 +22,12 @@ public class PlayerMove : MonoBehaviour
     public AudioClip ReloadClip;
     private AudioSource playerAudio;
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
-  
+
+    ParticleSystem ps;
+    List<ParticleSystem.Particle> inside = new List<ParticleSystem.Particle>();
+
+    private float flameDamage = 0.2f;
+    public PlayerHp playerHp;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +38,7 @@ public class PlayerMove : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         gunCount = 8;
         //gun = GetComponent<PlayerFire>();
+        ps = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -148,5 +154,18 @@ public class PlayerMove : MonoBehaviour
     void UpdateBulletUI()
     {
         bulletCountText.text = "현재 총알 : \n " + gunCount + "/ 8";
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if(other.CompareTag("Flame"))
+        {
+            Debug.Log($"Effect Collision : {other.name}");
+            if (playerHp != null)
+            {
+                playerHp.Damaged(flameDamage);
+            }
+        }
+       
     }
 }
