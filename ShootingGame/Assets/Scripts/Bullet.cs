@@ -7,11 +7,12 @@ public class Bullet : MonoBehaviour
     public GameObject particlePrefab; //Æø¹ß ÆÄÆ¼Å¬
     public AudioClip boomClip;
     private AudioSource bulletAudio;
-
+    
     private void Start()
     {
         bulletAudio = GetComponent<AudioSource>();
     }
+   
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
