@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Fire Extinguisher
   itemType: 2
   itemImage: {fileID: 0}
-  itemPrefab: {fileID: 407893068169873921, guid: 2b2632482e475124680e2a764ac7f309, type: 3}
+  itemPrefab: {fileID: 8815410343816141324, guid: 6ff0466bb341031499d1c0f03ccb884c, type: 3}
