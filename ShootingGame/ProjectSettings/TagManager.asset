@@ -13,6 +13,7 @@ TagManager:
   - FireExt
   - Exit
   - Flame
+  - Water
   layers:
   - Default
   - TransparentFX
