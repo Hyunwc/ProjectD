@@ -17,6 +17,12 @@ public class ActionController : MonoBehaviour
     public Slider hpBar;
 
     public GameObject FireExtPanel;
+    public GameObject FireExt2;
+
+    [SerializeField] private PlayerMove playerMove;  // PlayerMove
+    [SerializeField] private PlayerFire playerfire;  // PlayerFire
+    [SerializeField] private CameraRotate cameraRotate;  // CameraRotate
+
 
     void Update()
     {
@@ -61,7 +67,9 @@ public class ActionController : MonoBehaviour
     private void ItemInfoDisappear()
     {
         pickupActivated = false;
+        //actionText.gameObject.SetActive(false);
 
+        
         if (actionText != null)
         {
             actionText.gameObject.SetActive(false);
@@ -69,7 +77,7 @@ public class ActionController : MonoBehaviour
         else
         {
             Debug.LogError("에러");
-        }
+        } 
     }
 
     private void CanPickUp()
@@ -79,20 +87,31 @@ public class ActionController : MonoBehaviour
             if (hitInfo.transform != null)
             {
                 Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 했습니다."); // 인벤토리 넣기
+                theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
+                Destroy(hitInfo.transform.gameObject);
+                ItemInfoDisappear();
                 if (hitInfo.transform.CompareTag("FlashLight")) // Tag가 FlashLight 일 때, 플레이어의 FlashLight를 활성화
                 {
                     state = true;
                     handle.gameObject.SetActive(true);
-                } else if (hitInfo.transform.CompareTag("Medicine")) // tag가 Medicine 일 때, 획득시 hp 15회복
+                }
+                else if (hitInfo.transform.CompareTag("Medicine")) // tag가 Medicine 일 때, 획득시 hp 15회복
                 {
                     hpBar.value += 15;
-                }  else if (hitInfo.transform.CompareTag("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
+                }
+                else if (hitInfo.transform.CompareTag("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
                 {
                     FireExtPanel.SetActive(true);
+                    FireExt2.SetActive(true);
+
+                    Cursor.lockState = CursorLockMode.None;  // 커서 잠금 해제 
+                    Cursor.visible = true; // 커서 보이게
+                    playerMove.enabled = false; // 플레이어 조작 비활성화
+                    playerfire.enabled = false;
+                    cameraRotate.enabled = false;
+
+
                 }
-                theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
-                Destroy(hitInfo.transform.gameObject);
-                ItemInfoDisappear();
             } 
         }
     }
