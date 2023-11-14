@@ -37,11 +37,6 @@ public class ActionController : MonoBehaviour
             CheckItem();
             CanPickUp();
         }
-
-        else
-        {
-            Debug.Log("안돼");
-        }
     }
 
     private void CheckItem()
@@ -67,17 +62,13 @@ public class ActionController : MonoBehaviour
     private void ItemInfoDisappear()
     {
         pickupActivated = false;
-        //actionText.gameObject.SetActive(false);
+        actionText.gameObject.SetActive(false);
 
         
         if (actionText != null)
         {
             actionText.gameObject.SetActive(false);
         }
-        else
-        {
-            Debug.LogError("에러");
-        } 
     }
 
     private void CanPickUp()
@@ -101,6 +92,7 @@ public class ActionController : MonoBehaviour
                 }
                 else if (hitInfo.transform.CompareTag("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
                 {
+                    actionText.enabled = false; // 텍스트 숨기기
                     FireExtPanel.SetActive(true);
                     FireExt2.SetActive(true);
 
@@ -109,7 +101,6 @@ public class ActionController : MonoBehaviour
                     playerMove.enabled = false; // 플레이어 조작 비활성화
                     playerfire.enabled = false;
                     cameraRotate.enabled = false;
-
 
                 }
             } 
