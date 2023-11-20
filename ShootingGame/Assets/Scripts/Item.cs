@@ -18,6 +18,6 @@ public class Item : ScriptableObject
     public ItemType itemType; // 아이템 유형
     public Sprite itemImage; // 아이템 이미지 (인벤토리)
     public GameObject itemPrefab; // 아이템 프리팹(생성시 프리팹)
-    public AudioClip itemSound; // 추가: 아이템 소리
+    
 
 }

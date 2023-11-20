@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private tutorialSceneContorller tutorialController; // 튜토리얼 변수
+
     //적이 가질 수 있는 상태 
     public enum EnemyState
     {
@@ -62,6 +64,12 @@ public class Enemy : MonoBehaviour
             
         }
     }
+    void OnDeath()
+    {
+        // 적이 죽었을 때 튜토리얼 컨트롤러의 OnEnemyDeath 함수 호출
+        tutorialController.OnEnemyDeath(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -23,7 +23,16 @@ public class PlayerMove : MonoBehaviour
     public bool isGun = false;
     public bool isFireEx = true;
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
-    // Start is called before the first frame update
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("startCube"))
+        {
+            // 플레이어와 startCube가 만나면 로딩 씬으로 이동
+            LoadingSceneContorller.LoadScene("Game");
+        }
+    }
+
     void Start()
     {
         Cursor.visible = false; //마우스 커서 숨기기
