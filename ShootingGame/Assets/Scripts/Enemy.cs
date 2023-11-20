@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     public float speed = 3.0f;
 
     private Rigidbody enemyRb;
-   
+    private PlayerHp playerHp;
 
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
         //enemyRb = GetComponent<Rigidbody>();
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
+        playerHp = FindObjectOfType<PlayerHp>();
     }
 
     // Update is called once per frame
@@ -136,6 +137,31 @@ public class Enemy : MonoBehaviour
         {
             eState = EnemyState.Walk;
             agent.isStopped = false; //이동시작
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // 충돌한 오브젝트가 플레이어인지 확인
+        if (collision.gameObject.CompareTag("Player"))
+        {
+           
+            Rigidbody playerRb = collision.gameObject.GetComponent<Rigidbody>();
+
+            
+            float force = 4f;
+            Vector3 direction = collision.transform.position - transform.position;
+            direction.Normalize();
+
+            playerRb.AddForce(direction * force, ForceMode.Impulse);
+            playerHp.Damaged(5f);
+        }
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
+        {
+            Damaged(1f);
         }
     }
 }
