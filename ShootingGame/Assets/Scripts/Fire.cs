@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Fire : MonoBehaviour
 {
+    public int count;
     public float damage = 10; //데미지 양
     public float damageInterval = 1.0f; //데미지를 입히는 간격
 

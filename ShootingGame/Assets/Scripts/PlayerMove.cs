@@ -13,12 +13,15 @@ public class PlayerMove : MonoBehaviour
     int jumpCount; //점프 횟수
 
     public PlayerFire gun;
-
+    public FireEx fireEx;
+   
     private float gunCount; //남은 총알
     //private float maxgunCount = 8; //최대 총알
     public bool isReload = false; //재장전중인지 재장전중이면 true
     public Text bulletCountText; //총알수 표시
 
+    public bool isGun = false;
+    public bool isFireEx = true;
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     // Start is called before the first frame update
     void Start()
@@ -37,12 +40,16 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         //총알수가 0보다 크고 재장전상태가 아닐때
-        if (Input.GetMouseButtonDown(0) && gunCount > 0 && !isReload)
+        if (isGun && Input.GetMouseButtonDown(0) && gunCount > 0 && !isReload)
         {
             gun.Shot();
             gunCount--;
             UpdateBulletUI();
             Debug.Log("현재 총알수 : " + gunCount);
+        }
+        else if(Input.GetMouseButton(0) && isFireEx)
+        {
+            fireEx.Shot();
         }
 
         if (gunCount >= 0)

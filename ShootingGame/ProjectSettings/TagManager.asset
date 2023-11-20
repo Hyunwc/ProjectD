@@ -14,6 +14,7 @@ TagManager:
   - Exit
   - Flame
   - Water
+  - FireBell
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - UI
   - Item
   - FireExtPanel
-  - 
+  - Fire
   - 
   - 
   - 
