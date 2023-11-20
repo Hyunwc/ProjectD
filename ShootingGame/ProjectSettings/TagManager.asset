@@ -16,6 +16,7 @@ TagManager:
   - Water
   - FireBell
   - Fire
+  - Wall
   layers:
   - Default
   - TransparentFX
