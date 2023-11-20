@@ -15,6 +15,7 @@ TagManager:
   - Flame
   - Water
   - FireBell
+  - Fire
   layers:
   - Default
   - TransparentFX

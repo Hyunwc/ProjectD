@@ -28,17 +28,25 @@ public class FireEx : MonoBehaviour
     }
     private void OnParticleCollision(GameObject other)
     {
-        int t = other.gameObject.GetComponent<Fire>().count++;
-        fire = other.gameObject.GetComponentInChildren<ParticleSystem>();
-        //smoke = other.gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
-        var fire_em = fire.emission;
-        //var somke_em = smoke.emission;
-        fire_em.enabled = true;
-
-        if(t >= 110)
+        Debug.Log("우아아아 차가워");
+        if (other.CompareTag("Fire")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
         {
-            Debug.Log("!!!");
-            fire_em.rateOverTime = Mathf.Lerp(100.0f, 0.0f, t * 5f);
+            Destroy(other); // 충돌한 오브젝트를 파괴합니다.
         }
     }
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    int t = other.gameObject.GetComponent<Fire>().count++;
+    //    fire = other.gameObject.GetComponentInChildren<ParticleSystem>();
+    //    //smoke = other.gameObject.transform.GetChild(1).GetComponent<ParticleSystem>();
+    //    var fire_em = fire.emission;
+    //    //var somke_em = smoke.emission;
+    //    fire_em.enabled = true;
+
+    //    if(t >= 110)
+    //    {
+    //        Debug.Log("!!!");
+    //        fire_em.rateOverTime = Mathf.Lerp(100.0f, 0.0f, t * 5f);
+    //    }
+    //}
 }
