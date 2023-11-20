@@ -139,11 +139,6 @@ public class Boss : MonoBehaviour
         // 불렛 생성 후 발사합니다.
         GameObject bullet = Instantiate(bulletPref, transform.position + transform.forward, Quaternion.identity);
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower, ForceMode.Impulse);
-        ////플레이어의 위치보다 1 앞에, 벡터가아닌 transform인 이유는 회전할때도 올바른 위치에 생성되게 하기 위함
-        ////생성 후 bullet 변수에 할당
-        //GameObject bullet = Instantiate(bulletPref, transform.position + transform.forward, Quaternion.identity);
-
-        ////총알 프리팹이 앞으로 날아가는 순간적인 힘 발생
-        //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower, ForceMode.Impulse);
+        
     }
 }
