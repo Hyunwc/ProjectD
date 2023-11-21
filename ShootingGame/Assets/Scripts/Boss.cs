@@ -32,10 +32,8 @@ public class Boss : MonoBehaviour
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
-    //탈출구 파괴
     public GameObject ExitCube;
-
-    private PlayerHp playerHp;
+    
     void Damaged(float damage)
     {
         //공격 받은만큼 체력 감소
@@ -67,7 +65,6 @@ public class Boss : MonoBehaviour
     {
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
-        playerHp = FindObjectOfType<PlayerHp>();
         InvokeRepeating("AttackPlayer", 2f, 2f);
     }
 
@@ -76,7 +73,7 @@ public class Boss : MonoBehaviour
     {
         distance = Vector3.Distance(transform.position, player.position);
 
-        //print(distance);
+        print(distance);
 
         switch (bossState)
         {
@@ -144,30 +141,4 @@ public class Boss : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower, ForceMode.Impulse);
         
     }
-
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
-        {
-            Damaged(1f);
-        }
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-        // 충돌한 오브젝트가 플레이어인지 확인
-        if (collision.gameObject.CompareTag("Player"))
-        {
-
-            Rigidbody playerRb = collision.gameObject.GetComponent<Rigidbody>();
-
-
-            float force = 6f;
-            Vector3 direction = collision.transform.position - transform.position;
-            direction.Normalize();
-
-            playerRb.AddForce(direction * force, ForceMode.Impulse);
-            playerHp.Damaged(5f);
-        }
-    }
-
 }

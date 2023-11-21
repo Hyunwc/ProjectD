@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private tutorialSceneContorller tutorialController; // 튜토리얼 변수
+
     //적이 가질 수 있는 상태 
     public enum EnemyState
     {
@@ -23,7 +25,7 @@ public class Enemy : MonoBehaviour
     public float speed = 3.0f;
 
     private Rigidbody enemyRb;
-    private PlayerHp playerHp;
+   
 
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
@@ -62,13 +64,18 @@ public class Enemy : MonoBehaviour
             
         }
     }
+    void OnDeath()
+    {
+        // 적이 죽었을 때 튜토리얼 컨트롤러의 OnEnemyDeath 함수 호출
+        tutorialController.OnEnemyDeath(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         //enemyRb = GetComponent<Rigidbody>();
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
-        playerHp = FindObjectOfType<PlayerHp>();
     }
 
     // Update is called once per frame
@@ -137,31 +144,6 @@ public class Enemy : MonoBehaviour
         {
             eState = EnemyState.Walk;
             agent.isStopped = false; //이동시작
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        // 충돌한 오브젝트가 플레이어인지 확인
-        if (collision.gameObject.CompareTag("Player"))
-        {
-           
-            Rigidbody playerRb = collision.gameObject.GetComponent<Rigidbody>();
-
-            
-            float force = 4f;
-            Vector3 direction = collision.transform.position - transform.position;
-            direction.Normalize();
-
-            playerRb.AddForce(direction * force, ForceMode.Impulse);
-            playerHp.Damaged(5f);
-        }
-    }
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
-        {
-            Damaged(1f);
         }
     }
 }
