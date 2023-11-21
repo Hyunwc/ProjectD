@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     public Text bulletCountText; //총알수 표시
 
     public bool isGun = false;
-    public bool isFireEx = true;
+    public bool isFireEx = false;
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +49,20 @@ public class PlayerMove : MonoBehaviour
         Move();
         Jump();
         //총알수가 0보다 크고 재장전상태가 아닐때
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gun.gameObject.SetActive(true);
+            fireEx.gameObject.SetActive(false);
+            isGun = true;
+            isFireEx = false;
+        }else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            gun.gameObject.SetActive(false);
+            fireEx.gameObject.SetActive(true);
+            isGun = false;
+            isFireEx = true;
+        }
+
         if (isGun && Input.GetMouseButtonDown(0) && gunCount > 0 && !isReload)
         {
             gun.Shot();
@@ -159,6 +173,6 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateBulletUI()
     {
-        bulletCountText.text = "현재 총알 : \n " + gunCount + "/ 8";
+        bulletCountText.text = "Revolver\n현재 총알 : \n " + gunCount + "/ 8";
     }
 }

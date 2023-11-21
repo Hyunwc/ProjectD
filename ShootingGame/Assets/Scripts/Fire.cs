@@ -5,8 +5,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Fire : MonoBehaviour
 {
-    public int count;
+    public int hitcount = 0; //맞은 총알 수
     private float damage = 0.05f; //데미지 양
+
+    private void Update()
+    {
+        if(hitcount == 3)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void OnTriggerStay(Collider other)
     {
