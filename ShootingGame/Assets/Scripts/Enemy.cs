@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private tutorialSceneContorller tutorialController; // 튜토리얼 변수
-
     //적이 가질 수 있는 상태 
     public enum EnemyState
     {
@@ -17,7 +15,7 @@ public class Enemy : MonoBehaviour
         Damaged, //피격
         Dead // 죽음
     }
-    
+
     //상태를 담아둘 변수, 기본 상태로 시작
     public EnemyState eState = EnemyState.Idle;
     public float hp = 100; //적체력
@@ -25,14 +23,14 @@ public class Enemy : MonoBehaviour
     public float speed = 3.0f;
 
     private Rigidbody enemyRb;
-   
+    private PlayerHp playerHp;
 
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
 
-    
-   // private GameObject player;
+
+    // private GameObject player;
 
     void Damaged(float damage)
     {
@@ -58,24 +56,20 @@ public class Enemy : MonoBehaviour
             //}
         }
         //hp가 0이면 오브젝트 파괴
-        else{
+        else
+        {
             //eState = EnemyState.Dead;
             Destroy(gameObject);
-            
+
         }
     }
-    void OnDeath()
-    {
-        // 적이 죽었을 때 튜토리얼 컨트롤러의 OnEnemyDeath 함수 호출
-        tutorialController.OnEnemyDeath(gameObject);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         //enemyRb = GetComponent<Rigidbody>();
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
+        playerHp = FindObjectOfType<PlayerHp>();
     }
 
     // Update is called once per frame
@@ -87,7 +81,7 @@ public class Enemy : MonoBehaviour
         //적과 플레이어 사이 거리 출력
         //print(distance);
         //기본,이동,공격 상태일때 할일 나누기
-        switch(eState)
+        switch (eState)
         {
             case EnemyState.Idle: Idle(); break;
             case EnemyState.Walk: Walk(); break;
@@ -98,13 +92,13 @@ public class Enemy : MonoBehaviour
         //direction.Normalize(); //정규화
 
         //transform.position += direction * speed * Time.deltaTime;
-   
+
     }
 
     void Idle()
     {
         //플레이어와의 거리가 8 이하라면
-        if(distance <= 8)
+        if (distance <= 8)
         {
             Debug.Log("추적");
             //걷기 상태로
@@ -116,14 +110,14 @@ public class Enemy : MonoBehaviour
     void Walk()
     {
         //8보다 크다면
-        if(distance > 8)
+        if (distance > 8)
         {
             Debug.Log("정지");
             eState = EnemyState.Idle;
             agent.isStopped = true; //이동 중단
             agent.ResetPath(); //경로 초기화
         }
-        else if(distance <= 0.5)
+        else if (distance <= 0.5)
         {
             Debug.Log("공격");
             eState = EnemyState.Attack; //공격상태로
@@ -144,6 +138,31 @@ public class Enemy : MonoBehaviour
         {
             eState = EnemyState.Walk;
             agent.isStopped = false; //이동시작
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // 충돌한 오브젝트가 플레이어인지 확인
+        if (collision.gameObject.CompareTag("Player"))
+        {
+
+            Rigidbody playerRb = collision.gameObject.GetComponent<Rigidbody>();
+
+
+            float force = 4f;
+            Vector3 direction = collision.transform.position - transform.position;
+            direction.Normalize();
+
+            playerRb.AddForce(direction * force, ForceMode.Impulse);
+            playerHp.Damaged(5f);
+        }
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
+        {
+            Damaged(1f);
         }
     }
 }
