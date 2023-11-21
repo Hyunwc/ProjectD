@@ -11,6 +11,7 @@ public class PlayerFire : MonoBehaviour
     //ÃÑ¾Ë ±ËÀû ±×¸®±â À§ÇÑ ·»´õ·¯
     private LineRenderer lineRenderer;
     private float fireDistance = 100f;
+    //public Fire fire;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class PlayerFire : MonoBehaviour
 
         lineRenderer.enabled = false;
         lineRenderer.positionCount = 2;
+        //fire = FindObjectOfType<Fire>();
     }
 
     public void Shot()
@@ -31,6 +33,15 @@ public class PlayerFire : MonoBehaviour
             if (hit.transform.tag == "Enemy")
             {
                 hit.transform.SendMessage("Damaged", 20);
+            }
+            else if(hit.transform.tag == "Fire")
+            {
+                Debug.Log("ÆÄÀÌ¾î~");
+                Fire hitFire = hit.transform.GetComponent<Fire>();
+                if (hitFire != null)
+                {
+                    hitFire.hitcount++;
+                }
             }
             hitPosition = hit.point;
         }
