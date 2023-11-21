@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,11 +17,18 @@ public class ActionController : MonoBehaviour
     public GameObject FireExtPanel;
     public GameObject FireExt2;
 
+    public AudioClip firebellSound;
+    private AudioSource itemAudio;
+
     [SerializeField] private PlayerMove playerMove;  // PlayerMove
     [SerializeField] private PlayerFire playerfire;  // PlayerFire
     [SerializeField] private CameraRotate cameraRotate;  // CameraRotate
+    [SerializeField] private AudioClip fireBellSoundClip;//fireBellSound
 
-
+    private void Start()
+    {
+        itemAudio = GetComponent<AudioSource>();
+    }
     void Update()
     {
         CheckItem(); // 아이템 확인
@@ -46,7 +51,7 @@ public class ActionController : MonoBehaviour
             if (hitInfo.transform.tag != null) // 해당하는 tag의 경우에만 획득 가능하다는 text 출력, CompareTag("")
             {
                 ItemInfoAppear();
-            } 
+            }
         }
         else
             ItemInfoDisappear(); // Item이 아닐 시 text 출력x
@@ -56,7 +61,7 @@ public class ActionController : MonoBehaviour
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
-        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 " + "<color=yellow>" + "(E)" + "</color>";
+        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "<color=yellow>" + "(E)" + "</color>";
     }
 
     private void ItemInfoDisappear()
@@ -64,7 +69,7 @@ public class ActionController : MonoBehaviour
         pickupActivated = false;
         actionText.gameObject.SetActive(false);
 
-        
+
         if (actionText != null)
         {
             actionText.gameObject.SetActive(false);
@@ -78,8 +83,23 @@ public class ActionController : MonoBehaviour
             if (hitInfo.transform != null)
             {
                 Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 했습니다."); // 인벤토리 넣기
-                theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
-                Destroy(hitInfo.transform.gameObject);
+
+                if (hitInfo.transform.CompareTag("FireBell"))
+                {
+                    // AudioSource를 찾아와서 사운드를 재생
+                    AudioSource fireBellAudio = hitInfo.transform.GetComponent<AudioSource>();
+                    if (fireBellAudio != null && fireBellAudio.clip != null)
+                    {
+                        fireBellAudio.Play();
+                    }
+                }
+
+                else
+                {
+                    theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
+                    Destroy(hitInfo.transform.gameObject);
+                }
+
                 ItemInfoDisappear();
                 if (hitInfo.transform.CompareTag("FlashLight")) // Tag가 FlashLight 일 때, 플레이어의 FlashLight를 활성화
                 {
@@ -103,7 +123,8 @@ public class ActionController : MonoBehaviour
                     cameraRotate.enabled = false;
 
                 }
-            } 
+
+            }
         }
     }
 }

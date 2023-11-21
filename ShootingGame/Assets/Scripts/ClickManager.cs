@@ -11,8 +11,8 @@ public class ClickManager : MonoBehaviour
     public void ClickStart()
     {
         Time.timeScale = 1;
-        //클릭시 게임씬으로 시작
-        SceneManager.LoadScene("Game");
+        // 클릭시 튜토리얼 씬으로 시작
+        LoadingSceneContorller.LoadScene("tutorialScene");
     }
 
     public void ClickContinue()
