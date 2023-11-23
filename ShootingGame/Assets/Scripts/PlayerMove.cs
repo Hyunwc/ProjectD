@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     public bool isGun = false;
     public bool isFireEx = false;
+    public bool isMove = true; // 플레이어 움직임 bool타입
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
 
     private void OnTriggerEnter(Collider other)
@@ -46,8 +47,12 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Jump();
+        if (isMove)
+        {
+            Move();
+            Jump();
+        }
+        
         //총알수가 0보다 크고 재장전상태가 아닐때
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
