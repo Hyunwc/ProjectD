@@ -17,12 +17,13 @@ public class LoadingSceneContorller : MonoBehaviour
     }
     void Start()
     {
+        progressBar.fillAmount = 0f;
         StartCoroutine(LoadSceneProcess());
     }
 
     IEnumerator LoadSceneProcess()
     {
-       AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
+        AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         op.allowSceneActivation = false;
 
         float timer = 0f;
@@ -30,7 +31,7 @@ public class LoadingSceneContorller : MonoBehaviour
         {
             yield return null;
 
-            if (op.progress < 0.9f)
+            if (op.progress > 0.9f)
             {
                 progressBar.fillAmount = op.progress;
 
@@ -39,13 +40,13 @@ public class LoadingSceneContorller : MonoBehaviour
             {
                 timer += Time.unscaledDeltaTime;
                 progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
-                if(progressBar.fillAmount >= 1f)
+                if (progressBar.fillAmount >= 1f)
                 {
                     op.allowSceneActivation = true;
                     yield break;
                 }
             }
-            
+
         }
     }
 }

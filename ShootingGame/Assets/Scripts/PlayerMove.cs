@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     public bool isGun = false;
     public bool isFireEx = false;
     public bool isMove = true; // 플레이어 움직임 bool타입
+    public bool isShot = true; // true일때만 총알 나가게
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
 
     private void OnTriggerEnter(Collider other)
@@ -70,14 +71,22 @@ public class PlayerMove : MonoBehaviour
 
         if (isGun && Input.GetMouseButtonDown(0) && gunCount > 0 && !isReload)
         {
-            gun.Shot();
-            gunCount--;
-            UpdateBulletUI();
-            Debug.Log("현재 총알수 : " + gunCount);
+            if(isShot)
+            {
+                gun.Shot();
+                gunCount--;
+                UpdateBulletUI();
+                Debug.Log("현재 총알수 : " + gunCount);
+            }
+            
         }
         else if(Input.GetMouseButton(0) && isFireEx)
         {
-            fireEx.Shot();
+            if (isShot)
+            {
+                fireEx.Shot();
+            }
+            
         }
 
         if (gunCount >= 0)

@@ -11,6 +11,7 @@ public class PlayerFire : MonoBehaviour
     //ÃÑ¾Ë ±ËÀû ±×¸®±â À§ÇÑ ·»´õ·¯
     private LineRenderer lineRenderer;
     private float fireDistance = 100f;
+
     //public Fire fire;
     // Start is called before the first frame update
     private void Awake()
