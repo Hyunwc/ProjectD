@@ -145,6 +145,7 @@ public class Boss : MonoBehaviour
 
     }
 
+    //소화기한테 데미지를 받았을때
     private void OnParticleCollision(GameObject other)
     {
         if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
