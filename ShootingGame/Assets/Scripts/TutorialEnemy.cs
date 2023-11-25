@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class TutorialEnemy : MonoBehaviour
 {
     //적이 가질 수 있는 상태 
     public enum EnemyState
@@ -29,17 +29,19 @@ public class Enemy : MonoBehaviour
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
 
-   // private tutorialSceneContorller tuto;
-   
+    private tutorialSceneContorller tuto;
+
     // private GameObject player;
 
+
+    // Start is called before the first frame update
     void Start()
     {
         //enemyRb = GetComponent<Rigidbody>();
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
         playerHp = FindObjectOfType<PlayerHp>();
-        //tuto = FindObjectOfType<tutorialSceneContorller>();
+        tuto = FindObjectOfType<tutorialSceneContorller>();
     }
 
     void Damaged(float damage)
@@ -60,12 +62,12 @@ public class Enemy : MonoBehaviour
                 agent.isStopped = false;
                 agent.SetDestination(player.position);
             }
-            
+
         }
         //hp가 0이면 오브젝트 파괴
         else
         {
-            //tuto.DestroyMonster++;
+            tuto.DestroyMonster++;
             //eState = EnemyState.Dead;
             Destroy(gameObject);
 
