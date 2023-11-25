@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-
 
 public class Bullet : MonoBehaviour
 {
@@ -41,6 +39,18 @@ public class Bullet : MonoBehaviour
     //}
 
     public ParticleSystem particlePrefab; //폭발 파티클
+    public float speed = 10f; // 미사일의 속도
+    private Rigidbody rb; // 미사일의 Rigidbody 컴포넌트
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>(); // Rigidbody 컴포넌트를 가져옵니다.
+    }
+    private void Start()
+    {
+        //particlePrefab.Stop();
+        rb.AddForce(transform.forward * speed, ForceMode.Impulse); // 미사일의 앞쪽 방향으로 힘을 가합니다.
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -64,6 +74,7 @@ public class Bullet : MonoBehaviour
 
     IEnumerator DestroyAfterParticlePlay()
     {
+        Debug.Log("파티클은 호출됨 친구야");
         particlePrefab.Play();
 
         // 파티클 재생이 끝날 때까지 기다립니다.

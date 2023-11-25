@@ -26,14 +26,14 @@ public class PlayerMove : MonoBehaviour
     public bool isShot = true; // true일때만 총알 나가게
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("startCube"))
-        {
-            // 플레이어와 startCube가 만나면 로딩 씬으로 이동
-            LoadingSceneContorller.LoadScene("Game");
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("startCube"))
+    //    {
+    //        // 플레이어와 startCube가 만나면 로딩 씬으로 이동
+    //        LoadingSceneContorller.LoadScene("Game");
+    //    }
+    //}
 
     void Start()
     {

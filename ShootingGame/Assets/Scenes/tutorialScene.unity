@@ -5224,6 +5224,7 @@ GameObject:
   - component: {fileID: 1036783683}
   - component: {fileID: 1036783682}
   - component: {fileID: 1036783681}
+  - component: {fileID: 1036783685}
   m_Layer: 0
   m_Name: startCube
   m_TagString: startCube
@@ -5309,6 +5310,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1036783685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036783680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324657cd9b528a346ac0bd57c99cad6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1069054146
 GameObject:
   m_ObjectHideFlags: 0
@@ -6529,8 +6542,8 @@ GameObject:
   - component: {fileID: 1293163368}
   - component: {fileID: 1293163367}
   - component: {fileID: 1293163366}
-  - component: {fileID: 1293163365}
   - component: {fileID: 1293163364}
+  - component: {fileID: 1293163370}
   m_Layer: 0
   m_Name: Enemy (1)
   m_TagString: Enemy
@@ -6560,22 +6573,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1293163365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293163363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10c71d4fbf91634fa5d5975c9a9eb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eState: 0
-  hp: 100
-  hpBar: {fileID: 656140834}
-  speed: 3
 --- !u!136 &1293163366
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6657,6 +6654,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1293163370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293163363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580728ff5cff3574680bc4d06ed47a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eState: 0
+  hp: 100
+  hpBar: {fileID: 656140834}
+  speed: 3
 --- !u!1 &1293530283
 GameObject:
   m_ObjectHideFlags: 0
@@ -9396,8 +9409,8 @@ GameObject:
   - component: {fileID: 1760364091}
   - component: {fileID: 1760364090}
   - component: {fileID: 1760364089}
-  - component: {fileID: 1760364088}
   - component: {fileID: 1760364087}
+  - component: {fileID: 1760364093}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -9427,22 +9440,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1760364088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760364086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10c71d4fbf91634fa5d5975c9a9eb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eState: 0
-  hp: 100
-  hpBar: {fileID: 1934728154}
-  speed: 3
 --- !u!136 &1760364089
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9524,6 +9521,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1760364093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760364086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580728ff5cff3574680bc4d06ed47a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eState: 0
+  hp: 100
+  hpBar: {fileID: 1934728154}
+  speed: 3
 --- !u!1 &1808490805
 GameObject:
   m_ObjectHideFlags: 0
@@ -11419,8 +11432,8 @@ GameObject:
   - component: {fileID: 2099174513}
   - component: {fileID: 2099174512}
   - component: {fileID: 2099174511}
-  - component: {fileID: 2099174510}
   - component: {fileID: 2099174509}
+  - component: {fileID: 2099174515}
   m_Layer: 0
   m_Name: Enemy (2)
   m_TagString: Enemy
@@ -11450,22 +11463,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2099174510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099174508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e10c71d4fbf91634fa5d5975c9a9eb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eState: 0
-  hp: 100
-  hpBar: {fileID: 381089475}
-  speed: 3
 --- !u!136 &2099174511
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11547,6 +11544,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2099174515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099174508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580728ff5cff3574680bc4d06ed47a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eState: 0
+  hp: 100
+  hpBar: {fileID: 381089475}
+  speed: 3
 --- !u!1 &2102219604
 GameObject:
   m_ObjectHideFlags: 0
