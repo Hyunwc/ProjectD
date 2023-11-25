@@ -48,19 +48,29 @@ public class Bullet : MonoBehaviour
         {
             other.gameObject.SendMessage("Damaged", 10);
 
-            particlePrefab.Play();
-            Destroy(gameObject);
-
-
+            //particlePrefab.Play();
+            //Destroy(gameObject);
+            StartCoroutine(DestroyAfterParticlePlay());
 
         }
         else if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Wall"))
         {
 
-            particlePrefab.Play();
-            Destroy(gameObject);
-
+            //particlePrefab.Play();
+            //Destroy(gameObject);
+            StartCoroutine(DestroyAfterParticlePlay());
         }
+    }
+
+    IEnumerator DestroyAfterParticlePlay()
+    {
+        particlePrefab.Play();
+
+        // 파티클 재생이 끝날 때까지 기다립니다.
+        yield return new WaitForSeconds(particlePrefab.main.duration);
+
+        // 파티클 재생이 끝난 후에 게임 오브젝트를 파괴합니다.
+        Destroy(gameObject);
     }
 
 

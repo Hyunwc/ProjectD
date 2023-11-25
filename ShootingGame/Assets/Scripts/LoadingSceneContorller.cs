@@ -26,27 +26,15 @@ public class LoadingSceneContorller : MonoBehaviour
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         op.allowSceneActivation = false;
 
-        float timer = 0f;
-        while (!op.isDone)
+        float progress = 0f;
+
+        while (progress < 1f)
         {
+            progress += Time.deltaTime / 2f;
+            progressBar.fillAmount = progress;
             yield return null;
-
-            if (op.progress > 0.9f)
-            {
-                progressBar.fillAmount = op.progress;
-
-            }
-            else
-            {
-                timer += Time.unscaledDeltaTime;
-                progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
-                if (progressBar.fillAmount >= 1f)
-                {
-                    op.allowSceneActivation = true;
-                    yield break;
-                }
-            }
-
         }
+
+        op.allowSceneActivation = true; // 로딩이 완료되면 다음 씬을 시작
     }
 }

@@ -96,20 +96,12 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Time.timeScale = 0;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             subMenu.SetActive(true);
             //플레이어 기능 중단
-            GetComponent<PlayerMove>().enabled = false; //움직임 중지
-            //GetComponent<PlayerFire>().enabled = false; //사격 중지
-            GetComponentInChildren<CameraRotate>().enabled = false;  //카메라 회전 중지
-
-            //게임 내의 모든 적의 기능 중단
-            Enemy[] enemies = FindObjectsOfType<Enemy>();
-            foreach (var enemy in enemies)
-            {
-                enemy.enabled = false;
-            }
+            //GetComponent<PlayerMove>().enabled = false; //움직임 중지
         }
     }
 
