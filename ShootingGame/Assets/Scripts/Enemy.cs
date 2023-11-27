@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
+    public static int enemyDestroy = 0;
 
    // private tutorialSceneContorller tuto;
    
@@ -64,10 +65,12 @@ public class Enemy : MonoBehaviour
         }
         //hp가 0이면 오브젝트 파괴
         else
-        {
+        {   
+            enemyDestroy ++;
             //tuto.DestroyMonster++;
             //eState = EnemyState.Dead;
             Destroy(gameObject);
+            
 
         }
     }

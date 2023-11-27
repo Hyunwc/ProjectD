@@ -8,10 +8,13 @@ public class Fire : MonoBehaviour
     public int hitcount = 0; //맞은 총알 수
     private float damage = 0.05f; //데미지 양
 
+    static public int fireDestory = 0;
+
     private void Update()
     {
         if(hitcount == 3)
         {
+            fireDestory++;
             Destroy(gameObject);
         }
     }
@@ -36,6 +39,7 @@ public class Fire : MonoBehaviour
     {
         if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
         {
+            fireDestory++;
             Destroy(gameObject); // 충돌한 오브젝트를 파괴합니다.
         }
     }
