@@ -122,49 +122,10 @@ public class ActionController : MonoBehaviour
         actionText.enabled = true; // 텍스트 보이게
 
         Cursor.visible = false; // 커서 숨기기
-        playerMove.enabled = true; // 플레이어 조작 활성화
+        /*playerMove.enabled = true; // 플레이어 조작 활성화
         playerfire.enabled = true;
-        cameraRotate.enabled = true;
+        cameraRotate.enabled = true; */
     }
-
-    /*
-    private void ETC(int slotindex)
-    {
-        if (slotindex >= 0 && slotindex < slots.Length) // 배열 범위 확인
-        {
-            // 해당 슬롯의 무기 GameObject을 가져오기
-            GameObject weaponObject = slots[slotindex].GetWeaponObject();
-
-            if (weaponObject != null)
-            {
-                weaponObject.SetActive(true); // 무기 GameObject 활성화
-
-                // 다른 슬롯에 있는 무기 GameObject 비활성화
-                for (int i = 0; i < slots.Length; i++)
-                {
-                    if (i != slotindex)
-                    {
-                        slots[i].GetWeaponObject()?.SetActive(false);
-                    }
-                }
-            }
-        }
-    } */
-
-    /*
-    private void ETC(int slotIndex)
-    {
-        if(slots[slotIndex] !=null)
-        {
-            if(Firstslot != null)
-            {
-                Firstslot.SetActive(false);
-            }
-
-            Firstslot = slots[slotIndex];
-            Firstslot.SetActive(true);
-        }
-    } */
 
     private void CanPickUp()
     {
@@ -209,9 +170,9 @@ public class ActionController : MonoBehaviour
 
                     Cursor.lockState = CursorLockMode.None;  // 커서 잠금 해제 
                     Cursor.visible = true; // 커서 보이게
-                    playerMove.enabled = false; // 플레이어 조작 비활성화
+                    /*playerMove.enabled = false; // 플레이어 조작 비활성화
                     playerfire.enabled = false;
-                    cameraRotate.enabled = false;
+                    cameraRotate.enabled = false; */
 
                     FireExt2.SetActive(true);
 
