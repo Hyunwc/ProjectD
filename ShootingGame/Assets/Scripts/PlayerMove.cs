@@ -26,6 +26,7 @@ public class PlayerMove : MonoBehaviour
     public bool isShot = true; // true일때만 총알 나가게
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
 
+    [SerializeField] private GameObject FirePanel;
     //private void OnTriggerEnter(Collider other)
     //{
     //    if (other.CompareTag("startCube"))
@@ -149,6 +150,18 @@ public class PlayerMove : MonoBehaviour
         {
             //점프횟수 초기화
             jumpCount = 0;
+        }
+
+        if(collision.gameObject.tag == "Fire")
+        {
+            FirePanel.SetActive(true);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Fire"))
+        {
+            FirePanel.SetActive(false);
         }
     }
     //재장전
