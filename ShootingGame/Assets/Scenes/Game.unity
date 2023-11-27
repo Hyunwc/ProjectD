@@ -26350,7 +26350,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
@@ -26429,19 +26428,6 @@ Transform:
   m_Father: {fileID: 1900079790}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f84f9a21936527419042570f99709c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 600
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26467,7 +26453,7 @@ MonoBehaviour:
   firebellSound: {fileID: 0}
   playerMove: {fileID: 1900079786}
   playerfire: {fileID: 1029571995}
-  cameraRotate: {fileID: 963194229}
+  cameraRotate: {fileID: 0}
   fireBellSoundClip: {fileID: 0}
 --- !u!1001 &963390854
 PrefabInstance:
@@ -51220,6 +51206,7 @@ GameObject:
   - component: {fileID: 1900079791}
   - component: {fileID: 1900079792}
   - component: {fileID: 1900079793}
+  - component: {fileID: 1900079794}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -51384,6 +51371,20 @@ MonoBehaviour:
   - 0.05
   - 0.1
   Co2Panel: {fileID: 1151263926}
+--- !u!114 &1900079794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900079785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f84f9a21936527419042570f99709c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotCamXAxisSpeed: 5
+  rotCamYAxisSpeed: 3
 --- !u!1001 &1900996704
 PrefabInstance:
   m_ObjectHideFlags: 0

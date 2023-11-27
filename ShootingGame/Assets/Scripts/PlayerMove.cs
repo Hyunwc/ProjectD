@@ -25,16 +25,9 @@ public class PlayerMove : MonoBehaviour
     public bool isMove = true; // 플레이어 움직임 bool타입
     public bool isShot = true; // true일때만 총알 나가게
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
-
+    private CameraRotate rotateToMouse;
     [SerializeField] private GameObject FirePanel;
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("startCube"))
-    //    {
-    //        // 플레이어와 startCube가 만나면 로딩 씬으로 이동
-    //        LoadingSceneContorller.LoadScene("Game");
-    //    }
-    //}
+  
 
     void Start()
     {
@@ -44,6 +37,7 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gunCount = 8;
         //gun = GetComponent<PlayerFire>();
+        rotateToMouse = GetComponent<CameraRotate>();
     }
 
     // Update is called once per frame
@@ -53,8 +47,9 @@ public class PlayerMove : MonoBehaviour
         {
             Move();
             Jump();
+            UpdateRotate();
+
         }
-        
         //총알수가 0보다 크고 재장전상태가 아닐때
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -126,10 +121,13 @@ public class PlayerMove : MonoBehaviour
         //물리작용을 이용해 이동
         rb.MovePosition(rb.position + (dir * moveSpeed * Time.deltaTime));
 
-        // 마우스의 좌우 움직임 입력을 숫자로 받아서 저장
-        float mouseMoveX = Input.GetAxis("Mouse X");
-        //마우스가 움직인 만큼 Y축 회전
-        transform.Rotate(0, mouseMoveX * rotateSpeed * Time.deltaTime, 0);
+    }
+
+    void UpdateRotate()
+    {
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        rotateToMouse.CalculateRotation(mouseX, mouseY);
     }
     void Jump()
     {
@@ -179,6 +177,7 @@ public class PlayerMove : MonoBehaviour
     {
 
         isReload = true;
+        bulletCountText.text = "장전 중...";
         yield return new WaitForSeconds(3f);
         Debug.Log("총알 8발로 장전");
         gunCount = 8;
