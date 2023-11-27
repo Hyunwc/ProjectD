@@ -14,7 +14,11 @@ public class PlayerMove : MonoBehaviour
 
     public PlayerFire gun;
     public FireEx fireEx;
-   
+    public AudioSource moveSound; // 발소리 사운드
+    bool isMoving; // 플레이어가 움직이는지 여부
+    public AudioSource jumpSound;//점프 사운드
+    bool isJumping = false; // 점프 중 여부 확인
+
     private float gunCount; //남은 총알
     //private float maxgunCount = 8; //최대 총알
     public bool isReload = false; //재장전중인지 재장전중이면 true
@@ -129,7 +133,44 @@ public class PlayerMove : MonoBehaviour
         float mouseMoveX = Input.GetAxis("Mouse X");
         //마우스가 움직인 만큼 Y축 회전
         transform.Rotate(0, mouseMoveX * rotateSpeed * Time.deltaTime, 0);
+
+        //플레이어가 움직일 때만 사운드 재생
+        ManageMoveSound(Mathf.Abs(h) > 0.1f || Mathf.Abs(v) > 0.1f);
+    
+}
+
+    void ManageMoveSound(bool isMoving)
+    {
+       
+        if (isJumping) // 만약 점프 중이라면
+        {
+            // 점프 중일 때는 무브 사운드를 중지
+            if (moveSound.isPlaying)
+            {
+                moveSound.Stop();
+            }
+        }
+        else // 점프 중이 아니라면
+        {
+            if (isMoving)
+            {
+                // 플레이어가 움직이기 시작할 때 사운드 재생
+                if (!moveSound.isPlaying)
+                {
+                    moveSound.Play();
+                }
+            }
+            else
+            {
+                // 플레이어가 멈출 때 사운드 중지
+                if (moveSound.isPlaying)
+                {
+                    moveSound.Stop();
+                }
+            }
+        }
     }
+
     void Jump()
     {
         //스페이스 누른 순간, 점프 횟수가 2회 미만이라면
@@ -139,18 +180,26 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             //점프할때마다 횟수 증가
             jumpCount++;
+            if (jumpSound != null) jumpSound.Play(); // 점프 사운드 시작
+            isJumping = true;// 점프 상태변경
         }
     }
-
+    
     //어떤 물체와 충돌을 시작한 순간에 호출
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
-            //점프횟수 초기화
+            isJumping = false;// 점프 상태변경
             jumpCount = 0;
+            ManageMoveSound(isMoving);//발소리 사운드 메서드를 호출
         }
     }
+
+    
+
+   
+
     //재장전
     public void Reload()
     {

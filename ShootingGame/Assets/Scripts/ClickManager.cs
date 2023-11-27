@@ -12,7 +12,9 @@ public class ClickManager : MonoBehaviour
     {
         Time.timeScale = 1;
         // 클릭시 튜토리얼 씬으로 시작
-        LoadingSceneContorller.LoadScene("tutorialScene");
+        //LoadingSceneContorller.LoadScene("tutorialScene");
+        LoadingSceneContorller.LoadScene("Game");
+
     }
 
     public void ClickContinue()
