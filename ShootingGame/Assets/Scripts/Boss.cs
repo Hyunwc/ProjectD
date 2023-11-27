@@ -14,7 +14,6 @@ public class Boss : MonoBehaviour
         Walk, //이동
         Attack, //공격
         Damaged, //피격
-        Died,
         Special //필살기
     }
 
@@ -62,16 +61,12 @@ public class Boss : MonoBehaviour
         }
         else
         {
-            bossState = BossState.Died;
-            Died();
             //eState = EnemyState.Dead;
-            //Destroy(gameObject);
-            //ExitCube.SetActive(false);
+            Destroy(gameObject);
+            ExitCube.SetActive(false);
 
         }
     }
-
-    
     void Start()
     {
         player = FindObjectOfType<PlayerMove>().transform;
@@ -93,7 +88,6 @@ public class Boss : MonoBehaviour
             case BossState.Idle: Idle(); break;
             case BossState.Walk: Walk(); break;
             case BossState.Attack: Attack(); break;
-            //case BossState.Died: Died(); break;
         }
     }
     void Idle()
@@ -147,19 +141,6 @@ public class Boss : MonoBehaviour
             bossState = BossState.Walk;
             agent.isStopped = false; //이동시작
         }
-    }
-    void Died()
-    {
-        Debug.Log("보스 사망");
-        //bossAni.SetBool("Walk Forward", false);
-        // bossAni.SetTrigger("Die");
-        ExitCube.SetActive(false);
-        Destroy(gameObject);
-        
-
-        //bossState = BossState.Died; // 보스의 상태를 사망 상태로 변경하거나 필요한 처리 수행
-        //StopAllCoroutines(); // 모든 코루틴 중지 또는 필요한 작업 수행
-        //agent.isStopped = true; // 이동 중단 또는 필요한 작업 수행
     }
 
     IEnumerator AttackPeriodically()

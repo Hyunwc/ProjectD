@@ -9,7 +9,6 @@ public class TargetMisslie : MonoBehaviour
     
     NavMeshAgent nav;
 
-    public int hitCount = 0;
     private void Awake()
     {
         target = FindObjectOfType<PlayerMove>().transform;
@@ -20,9 +19,6 @@ public class TargetMisslie : MonoBehaviour
     private void Update()
     {
         nav.SetDestination(target.position);
-
-        if (hitCount == 2)
-            Destroy(gameObject);
     }
 
     void OnTriggerEnter(Collider other)
