@@ -17,6 +17,9 @@ TagManager:
   - FireBell
   - Fire
   - Wall
+  - startCube
+  - door
+  - TargetMisslie
   layers:
   - Default
   - TransparentFX
