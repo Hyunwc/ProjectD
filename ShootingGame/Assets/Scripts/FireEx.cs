@@ -44,13 +44,14 @@ public class FireEx : MonoBehaviour
             Debug.Log("Mouse button is pressed");
             yield return null;
             capacity -= 0.001f;
-            capacityText.text = "소화기\n현재 용량\n" + capacity + "%"; //용량 갱신
+            capacityText.text = "소화기\n현재 용량\n" + capacity.ToString("F1") + "%"; //용량 갱신
 
             if(capacity <= 0)
             {
                 playM.isGun = true;
                 playM.isFireEx = false;
-                playM.fireEx.gameObject.SetActive(false);
+                //playM.fireEx.gameObject.SetActive(false);
+                capacityText.text = "소화기\n용량 부족\n사용 불가";
                 // Destroy(gameObject); //소화기 파괴
                 break;
             }

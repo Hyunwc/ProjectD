@@ -7,6 +7,7 @@ public class ActionController : MonoBehaviour
     [SerializeField] private LayerMask layerMask;  // 특정 레이어를 가진 오브젝트만 획득.
     [SerializeField] private Text actionText;  // 행동을 보여 줄 텍스트
     [SerializeField] private Inventory theInventory;  // Inventory 스크립트
+    private GameManager gameManager;
 
     private bool pickupActivated = false;  // 아이템 습득 가능할시 True 
     private RaycastHit hitInfo;  // 충돌체 정보 저장
@@ -28,6 +29,7 @@ public class ActionController : MonoBehaviour
     private void Start()
     {
         itemAudio = GetComponent<AudioSource>();
+        gameManager = FindObjectOfType<GameManager>();
     }
     void Update()
     {
@@ -86,6 +88,7 @@ public class ActionController : MonoBehaviour
 
                 if (hitInfo.transform.CompareTag("FireBell"))
                 {
+                    gameManager.bellCheck = true;
                     // AudioSource를 찾아와서 사운드를 재생
                     AudioSource fireBellAudio = hitInfo.transform.GetComponent<AudioSource>();
                     if (fireBellAudio != null && fireBellAudio.clip != null)
