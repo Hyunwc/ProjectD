@@ -44,6 +44,14 @@ public class PlayerFire : MonoBehaviour
                     hitFire.hitcount++;
                 }
             }
+            else if (hit.transform.tag == "TargetMisslie")
+            {
+                TargetMisslie tar_M = hit.transform.GetComponent<TargetMisslie>();
+                if (tar_M != null)
+                {
+                    tar_M.hitCount++;
+                }
+            }
             hitPosition = hit.point;
         }
 
