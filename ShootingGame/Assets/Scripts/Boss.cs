@@ -151,10 +151,10 @@ public class Boss : MonoBehaviour
     void Died()
     {
         Debug.Log("보스 사망");
-        //bossAni.SetBool("Walk Forward", false);
-        // bossAni.SetTrigger("Die");
+        bossAni.SetBool("Walk Forward", false);
+        bossAni.SetTrigger("Die");
         ExitCube.SetActive(false);
-        Destroy(gameObject);
+        //Destroy(gameObject);
 
 
         //bossState = BossState.Died; // 보스의 상태를 사망 상태로 변경하거나 필요한 처리 수행

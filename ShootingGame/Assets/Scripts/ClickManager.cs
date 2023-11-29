@@ -8,13 +8,14 @@ public class ClickManager : MonoBehaviour
 {
     public GameObject subMenu;
     public GameObject player;
+    private CameraRotate cameraRotate;
     public void ClickStart()
     {
         Time.timeScale = 1;
         // 클릭시 튜토리얼 씬으로 시작
         LoadingSceneContorller.LoadScene("tutorialScene");
         //LoadingSceneContorller.LoadScene("Game");
-
+        cameraRotate = FindObjectOfType<CameraRotate>();
     }
 
     public void ClickContinue()
