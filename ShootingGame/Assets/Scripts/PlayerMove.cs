@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
 
     public PlayerFire gun;
     public FireEx fireEx;
+    public GameObject waterPaper;
+    public GameObject medicine;
     public AudioSource moveSound; // 발소리 사운드
     bool isMoving; // 플레이어가 움직이는지 여부
     public AudioSource jumpSound;//점프 사운드
@@ -26,8 +28,11 @@ public class PlayerMove : MonoBehaviour
 
     public bool isGun = false;
     public bool isFireEx = false;
+    public bool isWaterPaper = false;
+    public bool isMedi = false;
     public bool isMove = true; // 플레이어 움직임 bool타입
     public bool isShot = true; // true일때만 총알 나가게
+    
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     private CameraRotate rotateToMouse;
     [SerializeField] private GameObject FirePanel;
@@ -38,7 +43,7 @@ public class PlayerMove : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;   //마우스 커서가 게임 화면 못 벗어나게
         //플레이어의 rigidboyd컴포넌트 가져와서 저장
         rb = GetComponent<Rigidbody>();
-        gunCount = 8;
+        gunCount = 10;
         //gun = GetComponent<PlayerFire>();
         rotateToMouse = GetComponent<CameraRotate>();
     }
@@ -54,55 +59,7 @@ public class PlayerMove : MonoBehaviour
 
         }
 
-        //총알수가 0보다 크고 재장전상태가 아닐때
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            gun.gameObject.SetActive(true);
-            fireEx.gameObject.SetActive(false);
-            isGun = true;
-            isFireEx = false;
-        }else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            gun.gameObject.SetActive(false);
-            fireEx.gameObject.SetActive(true);
-            isGun = false;
-            isFireEx = true;
-        }
-
-        if (isGun && Input.GetMouseButtonDown(0) && gunCount > 0 && !isReload)
-        {
-            if(isShot)
-            {
-                gun.Shot();
-                gunCount--;
-                UpdateBulletUI();
-                Debug.Log("현재 총알수 : " + gunCount);
-            }
-            
-        }
-        else if(Input.GetMouseButton(0) && isFireEx)
-        {
-            if (isShot)
-            {
-                fireEx.Shot();
-            }
-            
-        }
-
-        if (gunCount >= 0)
-        {
-            Reload();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Time.timeScale = 0;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            subMenu.SetActive(true);
-            //플레이어 기능 중단
-            //GetComponent<PlayerMove>().enabled = false; //움직임 중지
-        }
+        InputEvent();
     }
 
 
@@ -134,6 +91,82 @@ public class PlayerMove : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
         rotateToMouse.CalculateRotation(mouseX, mouseY);
+    }
+
+    void InputEvent()
+    {
+        //여기는 일단 하드코딩
+        //총알수가 0보다 크고 재장전상태가 아닐때
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gun.gameObject.SetActive(true);
+            fireEx.gameObject.SetActive(false);
+            isGun = true;
+            isFireEx = false;
+            isWaterPaper = false;
+            isMedi = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            gun.gameObject.SetActive(false);
+            fireEx.gameObject.SetActive(true);
+            isGun = false;
+            isFireEx = true;
+            isWaterPaper = false;
+            isMedi = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            gun.gameObject.SetActive(false);
+            fireEx.gameObject.SetActive(true);
+            isGun = false;
+            isFireEx = false;
+            isWaterPaper = true;
+            isMedi = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            gun.gameObject.SetActive(false);
+            fireEx.gameObject.SetActive(true);
+            isGun = false;
+            isFireEx = false;
+            isWaterPaper = false;
+            isMedi = true;
+        }
+
+        if (isGun && Input.GetMouseButtonDown(0) && gunCount > 0 && !isReload)
+        {
+            if (isShot)
+            {
+                gun.Shot();
+                gunCount--;
+                UpdateBulletUI();
+                Debug.Log("현재 총알수 : " + gunCount);
+            }
+
+        }
+        else if (Input.GetMouseButton(0) && isFireEx)
+        {
+            if (isShot)
+            {
+                fireEx.Shot();
+            }
+
+        }
+
+        if (gunCount >= 0)
+        {
+            Reload();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //rotateToMouse.enabled = false;
+            Time.timeScale = 0;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            subMenu.SetActive(true);
+        }
     }
 
     void ManageMoveSound(bool isMoving)
@@ -224,8 +257,8 @@ public class PlayerMove : MonoBehaviour
         isReload = true;
         bulletCountText.text = "장전 중...";
         yield return new WaitForSeconds(3f);
-        Debug.Log("총알 8발로 장전");
-        gunCount = 8;
+        Debug.Log("총알 10발로 장전");
+        gunCount = 10;
         UpdateBulletUI(); // 장전 후에 UI 업데이트
         Debug.Log("장전 후 총일 : " + gunCount);
         // 코루틴이 실행되고 난 후에 isReload를 false로 설정하여 재장전이 끝났음을 표시합니다.
@@ -236,6 +269,6 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateBulletUI()
     {
-        bulletCountText.text = "Revolver\n현재 총알 : \n " + gunCount + "/ 8";
+        bulletCountText.text = "Revolver\n현재 총알 : \n " + gunCount + "/ 10";
     }
 }
