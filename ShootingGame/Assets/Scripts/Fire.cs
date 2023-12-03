@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Fire : MonoBehaviour
 {
     public int hitcount = 0; //맞은 총알 수
-    private float damage = 0.05f; //데미지 양
+    private float damage = 0.1f; //데미지 양
 
     private void Update()
     {
@@ -28,15 +28,6 @@ public class Fire : MonoBehaviour
                 playerHp.Damaged(damage);
 
             }
-        }
-    }
-
-
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("water")) // 충돌한 오브젝트가 fire 태그를 가지고 있는지 확인합니다.
-        {
-            Destroy(gameObject); // 충돌한 오브젝트를 파괴합니다.
         }
     }
 }
