@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     public PlayerFire gun;
     public FireEx fireEx;
     public GameObject waterPaper;
-    public GameObject medicine;
+    public Medicine medicine;
     public AudioSource moveSound; // 발소리 사운드
     bool isMoving; // 플레이어가 움직이는지 여부
     public AudioSource jumpSound;//점프 사운드
@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour
     private float gunCount; //남은 총알
     //private float maxgunCount = 8; //최대 총알
     public bool isReload = false; //재장전중인지 재장전중이면 true
+    //public GameObject waterGunPanel;
     public Text bulletCountText; //총알수 표시
 
     public bool isGun = false;
@@ -100,7 +101,9 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             gun.gameObject.SetActive(true);
+            //waterGunPanel.SetActive(true);
             fireEx.gameObject.SetActive(false);
+            medicine.gameObject.SetActive(false);
             isGun = true;
             isFireEx = false;
             isWaterPaper = false;
@@ -109,7 +112,9 @@ public class PlayerMove : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             gun.gameObject.SetActive(false);
+            //waterGunPanel.SetActive(false);
             fireEx.gameObject.SetActive(true);
+            medicine.gameObject.SetActive(false);
             isGun = false;
             isFireEx = true;
             isWaterPaper = false;
@@ -118,7 +123,8 @@ public class PlayerMove : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             gun.gameObject.SetActive(false);
-            fireEx.gameObject.SetActive(true);
+            fireEx.gameObject.SetActive(false);
+            medicine.gameObject.SetActive(false);
             isGun = false;
             isFireEx = false;
             isWaterPaper = true;
@@ -127,7 +133,8 @@ public class PlayerMove : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             gun.gameObject.SetActive(false);
-            fireEx.gameObject.SetActive(true);
+            fireEx.gameObject.SetActive(false);
+            medicine.gameObject.SetActive(true);
             isGun = false;
             isFireEx = false;
             isWaterPaper = false;
@@ -151,7 +158,10 @@ public class PlayerMove : MonoBehaviour
             {
                 fireEx.Shot();
             }
-
+        }
+        else if (Input.GetMouseButtonDown(0) && isMedi)
+        {
+            medicine.UseMedicine();
         }
 
         if (gunCount >= 0)
@@ -166,6 +176,12 @@ public class PlayerMove : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             subMenu.SetActive(true);
+        }
+
+        if(medicine.mediCount == 0)
+        {
+            medicine.gameObject.SetActive(false);
+            isMedi = false;
         }
     }
 

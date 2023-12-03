@@ -44,6 +44,11 @@ public class PlayerHp : MonoBehaviour
             
         }
     }
+    public void Heal(float heal)
+    {
+        hp += heal;
+        hpBar.value = hp;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
