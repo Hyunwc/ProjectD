@@ -13,6 +13,7 @@ public class FireEx : MonoBehaviour
 
     public AudioSource launchSound; // 발사 소리
     private bool isPlayingSound = false;
+    //[SerializeField] private GameObject FireTrigger;
 
     private void Start()
     {
@@ -21,10 +22,12 @@ public class FireEx : MonoBehaviour
         playM = FindObjectOfType<PlayerMove>();
  
     }
+    
     public void Shot()
     {
  
         fireExPt.Play();
+        //FireTrigger.SetActive(true);
         StartCoroutine(StopParticleAfterShot());
 
         if (!isPlayingSound)
@@ -56,7 +59,7 @@ public class FireEx : MonoBehaviour
                 break;
             }
         }
-
+        //FireTrigger.SetActive(false);
         fireExPt.Stop(); // 마우스가 놓여지면 파티클을 정지합니다.
 
         if (isPlayingSound)

@@ -34,7 +34,7 @@ public class Fire : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
+        if (other.CompareTag("water")) // 충돌한 오브젝트가 fire 태그를 가지고 있는지 확인합니다.
         {
             Destroy(gameObject); // 충돌한 오브젝트를 파괴합니다.
         }
