@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         //tuto = FindObjectOfType<tutorialSceneContorller>();
     }
 
-    void Damaged(float damage)
+    public void Damaged(float damage)
     {
         //공격 받은만큼 체력 감소
         hp -= damage;
@@ -158,11 +158,11 @@ public class Enemy : MonoBehaviour
             playerHp.Damaged(5f);
         }
     }
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
-        {
-            Damaged(1f);
-        }
-    }
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
+    //    {
+    //        Damaged(1f);
+    //    }
+    //}
 }

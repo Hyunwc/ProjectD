@@ -35,6 +35,10 @@ public class PlayerFire : MonoBehaviour
             {
                 hit.transform.SendMessage("Damaged", 20);
             }
+            else if(hit.transform.tag == "Boss")
+            {
+                hit.transform.SendMessage("Damaged", 20);
+            }
             else if(hit.transform.tag == "Fire")
             {
                 Debug.Log("ÆÄÀÌ¾î~");

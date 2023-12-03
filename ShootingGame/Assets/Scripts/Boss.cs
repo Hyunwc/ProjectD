@@ -41,7 +41,7 @@ public class Boss : MonoBehaviour
     bool isAttacking = false;
     private Animator bossAni;
     public GameObject bulletSpawnPoint;
-    void Damaged(float damage)
+    public void Damaged(float damage)
     {
         //공격 받은만큼 체력 감소
         hp -= damage;
@@ -195,13 +195,13 @@ public class Boss : MonoBehaviour
     }
 
     //소화기한테 데미지를 받았을때
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
-        {
-            Damaged(1f);
-        }
-    }
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    if (other.CompareTag("Water")) // 충돌한 오브젝트가 Fire 태그를 가지고 있는지 확인합니다.
+    //    {
+    //        Damaged(1f);
+    //    }
+    //}
     void OnCollisionEnter(Collision collision)
     {
         // 충돌한 오브젝트가 플레이어인지 확인

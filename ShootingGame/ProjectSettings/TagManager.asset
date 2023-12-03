@@ -20,6 +20,7 @@ TagManager:
   - startCube
   - door
   - TargetMisslie
+  - Boss
   layers:
   - Default
   - TransparentFX
