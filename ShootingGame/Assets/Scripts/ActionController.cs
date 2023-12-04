@@ -96,7 +96,6 @@ public class ActionController : MonoBehaviour
                         fireBellAudio.Play();
                     }
                 }
-
                 else
                 {
                     theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);

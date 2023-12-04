@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class Fire : MonoBehaviour
 {
     public int hitcount = 0; //맞은 총알 수
     private float damage = 0.1f; //데미지 양
     public FireManager fireManager; // FireManager 참조 추가
+    public static int fireDestroy = 0;
+
     void Update()
     {
      
         if (hitcount == 3)
         {
+            fireDestroy++;
             fireManager.fireObjects.Remove(gameObject);
             Destroy(gameObject);
+            
         }
     }
 
