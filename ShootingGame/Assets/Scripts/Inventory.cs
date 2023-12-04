@@ -81,7 +81,7 @@ public class Inventory : MonoBehaviour
     private void ChangeSlot(int snum) // 슬롯 교체
     {
         SelectSlot(snum);
-        //UseETC();
+        
     }
 
     private void SelectSlot(int snum) // 선택된 슬롯으로 이동

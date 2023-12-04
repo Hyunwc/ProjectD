@@ -8,6 +8,7 @@ public class ClickManager : MonoBehaviour
 {
     public GameObject subMenu;
     public GameObject player;
+    public GameObject RealQuit;
     private CameraRotate cameraRotate;
     public void ClickStart()
     {
@@ -30,6 +31,27 @@ public class ClickManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Start");
+    }
+    public void TutoReStart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("tutorialScene");
+    }
+    
+    public void Ch1ReStart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Game");
+    }
+    public void Quit()
+    {
+        subMenu.SetActive(false);
+        RealQuit.SetActive(true);
+    }
+    public void RePause()
+    {
+        RealQuit.SetActive(false);
+        subMenu.SetActive(true);
     }
 
     public void GameExit()

@@ -2171,3 +2171,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subMenu: {fileID: 0}
   player: {fileID: 0}
+  RealQuit: {fileID: 0}
