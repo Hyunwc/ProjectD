@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody enemyRb;
     private PlayerHp playerHp;
-
+    public EnemeManager enemeManager;
     Transform player;
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
         {
             //tuto.DestroyMonster++;
             //eState = EnemyState.Dead;
+            enemeManager.enemyObjects.Remove(gameObject);
             Destroy(gameObject);
 
         }
