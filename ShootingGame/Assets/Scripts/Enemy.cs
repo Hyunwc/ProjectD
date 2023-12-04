@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     NavMeshAgent agent; //NavMeshAgent 컴포넌트
     float distance; //플레이어와의 거리
 
-   // private tutorialSceneContorller tuto;
+    private tutorialSceneContorller tuto;
    
     // private GameObject player;
 
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
         player = FindObjectOfType<PlayerMove>().transform;
         agent = GetComponent<NavMeshAgent>();
         playerHp = FindObjectOfType<PlayerHp>();
-        //tuto = FindObjectOfType<tutorialSceneContorller>();
+        tuto = FindObjectOfType<tutorialSceneContorller>();
     }
 
     public void Damaged(float damage)
