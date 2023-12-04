@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     private CameraRotate rotateToMouse;
     [SerializeField] private GameObject FirePanel;
+    private NewInventory newInven;
    
     void Start()
     {
@@ -47,6 +48,7 @@ public class PlayerMove : MonoBehaviour
         gunCount = 10;
         //gun = GetComponent<PlayerFire>();
         rotateToMouse = GetComponent<CameraRotate>();
+        newInven = FindObjectOfType<NewInventory>();
     }
 
     // Update is called once per frame
@@ -57,7 +59,6 @@ public class PlayerMove : MonoBehaviour
             Move();
             Jump();
             UpdateRotate();
-
         }
 
         InputEvent();
@@ -97,10 +98,13 @@ public class PlayerMove : MonoBehaviour
     void InputEvent()
     {
         //여기는 일단 하드코딩
+        //여기 14주차에 배열로 처리할겁니다 ㅠㅠ (태현)
         //총알수가 0보다 크고 재장전상태가 아닐때
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            newInven.ChangeSlot(0);
             gun.gameObject.SetActive(true);
+            waterPaper.SetActive(false);
             //waterGunPanel.SetActive(true);
             fireEx.gameObject.SetActive(false);
             medicine.gameObject.SetActive(false);
@@ -111,8 +115,10 @@ public class PlayerMove : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            newInven.ChangeSlot(1);
             gun.gameObject.SetActive(false);
             //waterGunPanel.SetActive(false);
+            waterPaper.SetActive(false);
             fireEx.gameObject.SetActive(true);
             medicine.gameObject.SetActive(false);
             isGun = false;
@@ -122,9 +128,11 @@ public class PlayerMove : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            newInven.ChangeSlot(2);
             gun.gameObject.SetActive(false);
             fireEx.gameObject.SetActive(false);
             medicine.gameObject.SetActive(false);
+            waterPaper.SetActive(true);
             isGun = false;
             isFireEx = false;
             isWaterPaper = true;
@@ -132,9 +140,11 @@ public class PlayerMove : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            newInven.ChangeSlot(3);
             gun.gameObject.SetActive(false);
             fireEx.gameObject.SetActive(false);
             medicine.gameObject.SetActive(true);
+            waterPaper.SetActive(false);
             isGun = false;
             isFireEx = false;
             isWaterPaper = false;
