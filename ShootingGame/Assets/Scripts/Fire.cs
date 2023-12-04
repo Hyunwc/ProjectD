@@ -7,11 +7,13 @@ public class Fire : MonoBehaviour
 {
     public int hitcount = 0; //맞은 총알 수
     private float damage = 0.1f; //데미지 양
-
-    private void Update()
+    public FireManager fireManager; // FireManager 참조 추가
+    void Update()
     {
-        if(hitcount == 3)
+     
+        if (hitcount == 3)
         {
+            fireManager.fireObjects.Remove(gameObject);
             Destroy(gameObject);
         }
     }
@@ -24,9 +26,7 @@ public class Fire : MonoBehaviour
             PlayerHp playerHp = other.GetComponent<PlayerHp>();
             if (playerHp != null)
             {
-
                 playerHp.Damaged(damage);
-
             }
         }
     }
