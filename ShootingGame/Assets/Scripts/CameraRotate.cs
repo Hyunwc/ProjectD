@@ -13,12 +13,16 @@ public class CameraRotate : MonoBehaviour
     private float eulerAngleX; // 마우스 좌 / 우 이동으로 카메라 y축 회전
     private float eulerAngleY; // 마우스 위 / 아래 이동으로 카메라 x축 회전
 
+    public bool isPause = false;
     public void CalculateRotation(float mouseX, float mouseY)
     {
-        eulerAngleY += mouseX * rotCamYAxisSpeed;
-        eulerAngleX -= mouseY * rotCamYAxisSpeed;
-        eulerAngleX = ClampAngle(eulerAngleX, limitMinX, limitMaxX);
-        transform.rotation = Quaternion.Euler(eulerAngleX, eulerAngleY, 0);
+        if(!isPause)
+        {
+            eulerAngleY += mouseX * rotCamYAxisSpeed;
+            eulerAngleX -= mouseY * rotCamYAxisSpeed;
+            eulerAngleX = ClampAngle(eulerAngleX, limitMinX, limitMaxX);
+            transform.rotation = Quaternion.Euler(eulerAngleX, eulerAngleY, 0);
+        }    
     }
 
     // 카메라 x축 회전의 경우 회전 범위를 설정

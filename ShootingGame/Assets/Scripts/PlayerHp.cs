@@ -11,9 +11,11 @@ public class PlayerHp : MonoBehaviour
     public GameObject diePanel;
     public GameObject ClearPanel;
 
+    private CameraRotate cameraRotate;
     // Start is called before the first frame update
     void Start()
     {
+        cameraRotate = GetComponent<CameraRotate>();
         hpBar.value = hp; //시작 시 체력바에 초기 체력 값 적용
     }
 
@@ -27,19 +29,10 @@ public class PlayerHp : MonoBehaviour
         if (hp <= 0)
         {
             diePanel.SetActive(true);
+            cameraRotate.isPause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            //플레이어 기능 중단
-            //GetComponent<PlayerMove>().enabled = false; //움직임 중지
-            //GetComponent<PlayerFire>().enabled = false; //사격 중지
-            //GetComponentInChildren<CameraRotate>().enabled = false;  //카메라 회전 중지
-
-            ////게임 내의 모든 적의 기능 중단
-            //Enemy[] enemies = FindObjectsOfType<Enemy>();
-            //foreach(var enemy in enemies)
-            //{
-            //    enemy.enabled = false;
-            //}
+            
             Time.timeScale = 0;
             
         }
@@ -54,6 +47,7 @@ public class PlayerHp : MonoBehaviour
     {
         if(other.CompareTag("Exit"))
         {
+            cameraRotate.isPause = true;
             Time.timeScale = 0;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

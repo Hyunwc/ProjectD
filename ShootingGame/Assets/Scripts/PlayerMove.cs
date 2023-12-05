@@ -181,7 +181,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //rotateToMouse.enabled = false;
+            rotateToMouse.isPause = true;
             Time.timeScale = 0;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
