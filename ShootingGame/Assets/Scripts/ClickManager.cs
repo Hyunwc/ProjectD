@@ -10,18 +10,24 @@ public class ClickManager : MonoBehaviour
     public GameObject player;
     public GameObject RealQuit;
     private CameraRotate cameraRotate;
+
+    private void Start()
+    {
+        cameraRotate = FindObjectOfType<CameraRotate>();
+        //playerMove = FindObjectOfType<PlayerMove>();
+    }
     public void ClickStart()
     {
         Time.timeScale = 1;
         // 클릭시 튜토리얼 씬으로 시작
         LoadingSceneContorller.LoadScene("tutorialScene");
         //LoadingSceneContorller.LoadScene("Game");
-        cameraRotate = FindObjectOfType<CameraRotate>();
     }
 
     public void ClickContinue()
     {
         Time.timeScale = 1;
+        cameraRotate.isPause = false;
         subMenu.SetActive(false);
         Cursor.visible = false; //마우스 커서 숨기기
         Cursor.lockState = CursorLockMode.Locked;   //마우스 커서가 게임 화면 못 벗어나게
@@ -30,11 +36,13 @@ public class ClickManager : MonoBehaviour
     public void ClickExit()
     {
         Time.timeScale = 1;
+        cameraRotate.isPause = false;
         SceneManager.LoadScene("Start");
     }
     public void TutoReStart()
     {
         Time.timeScale = 1;
+        cameraRotate.isPause = false;
         SceneManager.LoadScene("tutorialScene");
     }
     
