@@ -1,4 +1,4 @@
-# ProjectD
+# Firestorm Escape
 탈출해보시조 캡스톤 디자인 저장소
 
 동의대학교 게임공학과 캡스톤 디자인 6조
