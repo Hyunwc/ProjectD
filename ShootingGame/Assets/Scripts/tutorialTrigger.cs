@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 public class tutorialTrigger : MonoBehaviour
 {
     private tutorialSceneContorller t_idx;
-    private PlayerMove ply;
+    private TutoPlayer ply;
 
     private void Start()
     {
-        ply = FindObjectOfType<PlayerMove>();
+        ply = FindObjectOfType<TutoPlayer>();
         t_idx = FindObjectOfType<tutorialSceneContorller>();
     }
     private void OnTriggerEnter(Collider other)
@@ -19,7 +19,15 @@ public class tutorialTrigger : MonoBehaviour
         if (other.CompareTag("Player") && t_idx.DestroyMonster < 3)
         {
             t_idx.idx++;
-            ply.isMove = false;
+            t_idx.ChangeTutorialText();
+            //ply.isMove = false;
+            Destroy(gameObject);
+
+        }
+        else if (other.CompareTag("Player") && t_idx.idx == 20)
+        {
+            t_idx.idx++;
+            //ply.isMove = true;
             Destroy(gameObject);
 
         }
