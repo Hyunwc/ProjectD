@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 
 public class tutorialSceneContorller : MonoBehaviour
 {
-   
     //튜토리얼 패널
     [SerializeField] private GameObject[] tutorialText;
 
@@ -16,16 +15,22 @@ public class tutorialSceneContorller : MonoBehaviour
     private float delay = 3f;
     //플레이어 참조
     private PlayerMove ply;
+    private TutoPlayer tply;
     public GameObject StartDoor;
+    public GameObject MiddleDoor;
     public GameObject lastDoor;
     public int DestroyMonster = 0;
+    public int DestoryFire = 0;
 
     public Text timeText;
     private void Start()
     {
         ply = FindObjectOfType<PlayerMove>();
+        tply = FindObjectOfType<TutoPlayer>();
         ply.isMove = false;
         ply.isShot = false;
+        tply.isMove = false;
+        tply.isShot = false;
         tutorialText[idx].SetActive(true);
 
         StartCoroutine(TutorialStart());
@@ -38,7 +43,7 @@ public class tutorialSceneContorller : MonoBehaviour
             case 2:
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    ply.isMove = true;
+                    tply.isMove = true;
                     idx++;
                     ChangeTutorialText();
                 }
@@ -73,22 +78,46 @@ public class tutorialSceneContorller : MonoBehaviour
                 }
                 break;
             case 9:
+                tply.isChange = true;
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     idx++;
                     ChangeTutorialText();
                 }
                 break;
-            case 11:
+            case 12:
+                tply.isChange = true;
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
                     idx++;
                     ChangeTutorialText();
                 }
                 break;
-            case 13:
-                ply.isMove = true;
-                ply.isShot = true;
+            case 15:
+                tply.isChange = true;
+                if (Input.GetKeyDown(KeyCode.Alpha3))
+                {
+                    idx++;
+                    ChangeTutorialText();
+                }
+                break;
+            case 17:
+                tply.isChange = true;
+                if (Input.GetKeyDown(KeyCode.Alpha4))
+                {
+                    idx++;
+                    ChangeTutorialText();
+                }
+                break;
+            case 20:
+                tply.isMove = true;
+                tply.isChange = true;
+                MiddleDoor.SetActive(false);
+                ChangeTutorialText();
+                //ply.isShot = true;
+                break;
+            case 21:
+                tply.isShot = true;
                 break;
         }
 
@@ -117,9 +146,13 @@ public class tutorialSceneContorller : MonoBehaviour
             if (idx == tutorialText.Length - 1)
                 break;
             //3초 딜레이 먹히는 idx = 0,1,8,10,12
+            //New 버전 idx = 0, 1, 8, 10, 11, 13, 14, 16, 18, 19
             // IDX가 2일 때는 W 키를 눌렀을 때 처리를 하므로, 여기서는 처리X
-            if (idx == 0 || idx == 1 || idx == 8 || idx == 10 || idx == 12)
+            if (idx == 0 || idx == 1 || idx == 8 || idx == 10 || idx == 11 || idx == 13 || idx == 14 || idx == 16 || idx == 18 || idx == 19)
             {
+                if(idx == 10 || idx == 13 || idx == 16 || idx == 18)
+                    tply.isChange = false;
+
                 yield return new WaitForSeconds(delay);
                 idx++;
                 ChangeTutorialText();
@@ -132,7 +165,7 @@ public class tutorialSceneContorller : MonoBehaviour
 
     }
 
-    void ChangeTutorialText()
+    public void ChangeTutorialText()
     {
         for (int i = 0; i < tutorialText.Length; i++)
         {
