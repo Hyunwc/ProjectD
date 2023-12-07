@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System.Diagnostics;
 //using static Enemy; // < ?
 
 public class Boss : MonoBehaviour
@@ -20,7 +21,7 @@ public class Boss : MonoBehaviour
 
     //상태를 담아둘 변수, 기본 상태로 시작
     public BossState bossState = BossState.Idle;
-    public float hp = 500; //보스체력
+    public float hp = 500f; //보스체력
     public Slider hpBar; //보스 체력바
     public float speed = 3.0f;
     //public GameObject bossBullet;
@@ -37,38 +38,37 @@ public class Boss : MonoBehaviour
     public GameObject ExitCube;
 
     private PlayerHp playerHp;
+    public bool canMove = false;
 
     bool isAttacking = false;
     private Animator bossAni;
     public GameObject bulletSpawnPoint;
     public void Damaged(float damage)
     {
-        //공격 받은만큼 체력 감소
-        hp -= damage;
-        //감소한 체력을 체력바에 표시
-        hpBar.value = hp;
-
-        //agent.isStopped = true; //이동 중단
-        //agent.ResetPath(); //경로 초기화
-        //체력이 남아있다면 피격상태로
-        if (hp > 0)
+        if(canMove)
         {
-            if (bossState == BossState.Idle)
+            //공격 받은만큼 체력 감소
+            hp -= damage;
+            //감소한 체력을 체력바에 표시
+            hpBar.value = hp;
+            //체력이 남아있다면 피격상태로
+            if (hp > 0)
             {
-                bossState = BossState.Walk;
-                agent.isStopped = false;
-                agent.SetDestination(player.position);
+                if (bossState == BossState.Idle)
+                {
+                    bossState = BossState.Walk;
+                    agent.isStopped = false;
+                    agent.SetDestination(player.position);
+                }
+            }
+            else
+            {
+                bossState = BossState.Died;
+                Died();
+
             }
         }
-        else
-        {
-            bossState = BossState.Died;
-            Died();
-            //eState = EnemyState.Dead;
-            //Destroy(gameObject);
-            //ExitCube.SetActive(false);
-
-        }
+        
     }
 
 
@@ -78,6 +78,9 @@ public class Boss : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         playerHp = FindObjectOfType<PlayerHp>();
         bossAni = GetComponent<Animator>();
+        //hpBar.maxValue = hp; // 슬라이더의 maxValue를 hp와 동일하게 설정
+        //hpBar.value = 0; // 초기 체력을 0으로 설정
+        //hp = 0;
         //InvokeRepeating("AttackPlayer", 2f, 2f);
     }
 
@@ -87,14 +90,17 @@ public class Boss : MonoBehaviour
         distance = Vector3.Distance(transform.position, player.position);
 
         //print(distance);
-
-        switch (bossState)
+        if(canMove)
         {
-            case BossState.Idle: Idle(); break;
-            case BossState.Walk: Walk(); break;
-            case BossState.Attack: Attack(); break;
-                //case BossState.Died: Died(); break;
+            switch (bossState)
+            {
+                case BossState.Idle: Idle(); break;
+                case BossState.Walk: Walk(); break;
+                case BossState.Attack: Attack(); break;
+                    //case BossState.Died: Died(); break;
+            }
         }
+        
     }
     void Idle()
     {
@@ -150,7 +156,7 @@ public class Boss : MonoBehaviour
     }
     void Died()
     {
-        Debug.Log("보스 사망");
+        //Debug.Log("보스 사망");
         bossAni.SetBool("Walk Forward", false);
         bossAni.SetTrigger("Die");
         ExitCube.SetActive(false);
