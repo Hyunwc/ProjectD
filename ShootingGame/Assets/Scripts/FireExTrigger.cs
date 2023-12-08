@@ -20,6 +20,7 @@ public class FireExTrigger : MonoBehaviour
         
         if (other.CompareTag("Fire"))
         {
+            Fire.fireDestroy++;
             Debug.Log("불과 충돌");
             fireManager.fireObjects.Remove(other.gameObject);
             Destroy(other.gameObject, 0.5f);

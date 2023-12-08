@@ -12,7 +12,7 @@ public class NewInventory : MonoBehaviour
         slotnum = 0;
     }
 
-    
+
 
     //public void Putnum() // 1 ~ 0 키를 누르면 슬롯을 선택할 수 있게끔 
     //{
@@ -38,4 +38,20 @@ public class NewInventory : MonoBehaviour
         images[snum].gameObject.SetActive(true);
         slotnum = snum;
     }
+
+    /*
+    public void AcquireItem(Item _item, int _count = 1) // 아이템 획득을 처리 
+    {
+        for (int i = 0; i < images.Length; i++)
+        {
+            if (images[i].item != null)
+            {
+                if (images[i].item.itemName == _item.itemName) // 같은 종류의 아이템이 있는지 찾고 해당 슬롯의 갯수 업데이트
+                {
+                    images[i].SetSlotCount(_count);
+                    return;
+                }
+            }
+        }
+    } */
 }

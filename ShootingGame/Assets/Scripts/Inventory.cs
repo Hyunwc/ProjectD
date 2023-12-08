@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        Putnum();
+        //Putnum();
         //UseETC();
     }
 
@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
+    /*
     private void Putnum() // 1 ~ 0 키를 누르면 슬롯을 선택할 수 있게끔 
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))

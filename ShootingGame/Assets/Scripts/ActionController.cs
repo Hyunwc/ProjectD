@@ -12,7 +12,7 @@ public class ActionController : MonoBehaviour
     private bool pickupActivated = false;  // 아이템 습득 가능할시 True 
     private RaycastHit hitInfo;  // 충돌체 정보 저장
     public GameObject handle;
-    private bool state = false;
+    //private bool state = false;
     public Slider hpBar;
 
     public GameObject FireExtPanel;
@@ -63,7 +63,7 @@ public class ActionController : MonoBehaviour
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
-        //actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "<color=yellow>" + "(E)" + "</color>";
+        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "<color=yellow>" + "(E)" + "</color>";
     }
 
     private void ItemInfoDisappear()
@@ -105,7 +105,7 @@ public class ActionController : MonoBehaviour
                 ItemInfoDisappear();
                 if (hitInfo.transform.CompareTag("FlashLight")) // Tag가 FlashLight 일 때, 플레이어의 FlashLight를 활성화
                 {
-                    state = true;
+                    //state = true;
                     handle.gameObject.SetActive(true);
                 }
                 else if (hitInfo.transform.CompareTag("Medicine")) // tag가 Medicine 일 때, 획득시 hp 15회복
