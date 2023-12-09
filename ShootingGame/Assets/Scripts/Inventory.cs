@@ -28,6 +28,7 @@ public class Inventory : MonoBehaviour
         //UseETC();
     }
 
+    /*
     public void AcquireItem(Item _item, int _count = 1) // 아이템 획득을 처리 
     {
         for (int i = 0; i < slots.Length; i++)
@@ -50,7 +51,7 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
-    }
+    } */
 
     /*
     private void Putnum() // 1 ~ 0 키를 누르면 슬롯을 선택할 수 있게끔 

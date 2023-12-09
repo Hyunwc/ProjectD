@@ -193,7 +193,7 @@ public class TutoPlayer : MonoBehaviour
             subMenu.SetActive(true);
         }
 
-        if (medicine.mediCount == 0)
+        if (Medicine.mediCount == 0)
         {
             medicine.gameObject.SetActive(false);
             isMedi = false;

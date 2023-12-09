@@ -23,10 +23,16 @@ public class ActionController : MonoBehaviour
 
     [SerializeField] private PlayerMove playerMove;  // PlayerMove
     [SerializeField] private PlayerFire playerfire;  // PlayerFire
-    [SerializeField] private CameraRotate cameraRotate;  // CameraRotate
-    [SerializeField] private AudioClip fireBellSoundClip;//fireBellSound
+
+    [SerializeField] private Text FireExtText1;  // 패널 텍스트 1
+    [SerializeField] private Text FireExtText2;  // 패널 텍스트 2
+    [SerializeField] private Text FireExtText3;  // 패널 텍스트 3
+    [SerializeField] private Text FireExtText4;  // 패널 텍스트 4 (임의)
+    [SerializeField] private GameObject fireextinguisher;  // 패널 텍스트 
 
     public GameObject eleText; //elevator text
+    public Text eleText1;
+
 
     private void Start()
     {
@@ -37,9 +43,47 @@ public class ActionController : MonoBehaviour
     {
         CheckItem(); // 아이템 확인
         TryAction(); // 아이템 습득
+
+        if (eleText.activeSelf) //FIreExtPanel이 활성화된 상태에서만 F키를 입력받음 
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                eleText1.text = "엘리베이터를 탑승하면 안됩니다!";
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                eleText.SetActive(false);
+            }
+        } 
+ 
+        if (FireExtPanel.activeSelf) //FIreExtPanel이 활성화된 상태에서만 F키를 입력받음 
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                DisappearPanel();
+                fireextinguisher.SetActive(true);
+                PlayMode();
+            }
+        }
     }
 
-    private void TryAction()
+    private void PlayMode() // Player 제한을 해제하고 다시 움직이게끔 
+    {
+        actionText.enabled = true; // 텍스트 보이게
+
+        Cursor.visible = false; // 커서 숨기기
+        /*playerMove.enabled = true; // 플레이어 조작 활성화
+        playerfire.enabled = true;
+        cameraRotate.enabled = true; */
+    }
+
+    private void DisappearPanel() // FireExtPanel을 비활성화
+    {
+        FireExtPanel.SetActive(false);
+        FireExt2.SetActive(false);
+    }
+
+        private void TryAction()
     {
         if (Input.GetKeyDown(KeyCode.E)) // E키 입력 시
         {
@@ -65,7 +109,7 @@ public class ActionController : MonoBehaviour
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
-        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "<color=yellow>" + "(E)" + "</color>";
+        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "<color=yellow>" + " (E) " + "</color>";
     }
 
     private void ItemInfoDisappear()
@@ -92,6 +136,7 @@ public class ActionController : MonoBehaviour
                 {
                     eleText.SetActive(true);
                 }
+
                 if (hitInfo.transform.CompareTag("FireBell"))
                 {
                     gameManager.bellCheck = true;
@@ -104,8 +149,8 @@ public class ActionController : MonoBehaviour
                 }
                 else
                 {
-                    theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
-                    Destroy(hitInfo.transform.gameObject);
+                    //theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
+                    //Destroy(hitInfo.transform.gameObject);
                 }
 
                 ItemInfoDisappear();
@@ -114,9 +159,10 @@ public class ActionController : MonoBehaviour
                     //state = true;
                     handle.gameObject.SetActive(true);
                 }
-                else if (hitInfo.transform.CompareTag("Medicine")) // tag가 Medicine 일 때, 획득시 hp 15회복
+                else if (hitInfo.transform.CompareTag("Medicine")) // tag가 Medicine 일 때, 획득시 아이템 삭제 후 medicount ++ 
                 {
-                    hpBar.value += 15;
+                    Destroy(hitInfo.transform.gameObject);
+                    Medicine.mediCount++;
                 }
                 else if (hitInfo.transform.CompareTag("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
                 {
@@ -124,11 +170,16 @@ public class ActionController : MonoBehaviour
                     FireExtPanel.SetActive(true);
                     FireExt2.SetActive(true);
 
+                    FireExtText1.text = "1. 소화기의 몸체를 단단히 잡고 고정시킨 뒤, 안전핀을 뽑는다.";
+                    FireExtText2.text = "2. 바람을 등지고 소화기의 호스를 불 쪽으로 향하게 잡는다.";
+                    FireExtText3.text = "3. 발화지점을 향해 손잡이를 누른다. 분사 방향은 위에서 아래로 15도 각도를 유지한다.";
+                    FireExtText4.text = "위 단계를 순차적으로 진행했다면 " + "<color=yellow>" + "(F)" + "</color>" + " 버튼을 누르세요."; //임의
+
                     Cursor.lockState = CursorLockMode.None;  // 커서 잠금 해제 
                     Cursor.visible = true; // 커서 보이게
                     playerMove.enabled = false; // 플레이어 조작 비활성화
                     playerfire.enabled = false;
-                    cameraRotate.enabled = false;
+                    //cameraRotate.enabled = false;
 
                 }
 

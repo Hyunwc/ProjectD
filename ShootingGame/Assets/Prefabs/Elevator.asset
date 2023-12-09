@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30282987fcc18b74aba456545b0b7507, type: 3}
   m_Name: Elevator
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Elevator
   itemType: 0
   itemImage: {fileID: 0}
   itemPrefab: {fileID: 0}

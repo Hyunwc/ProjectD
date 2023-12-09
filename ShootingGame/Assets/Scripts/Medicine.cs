@@ -7,7 +7,7 @@ public class Medicine : MonoBehaviour
 {
     private PlayerHp playerHp;
     public Text mediText;
-    public int mediCount = 1;
+    public static int mediCount = 1;
     // Start is called before the first frame update
     void Start()
     {
