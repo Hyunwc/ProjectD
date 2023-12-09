@@ -21,6 +21,7 @@ TagManager:
   - door
   - TargetMisslie
   - Boss
+  - ele
   layers:
   - Default
   - TransparentFX

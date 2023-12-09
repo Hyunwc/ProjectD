@@ -26,6 +26,8 @@ public class ActionController : MonoBehaviour
     [SerializeField] private CameraRotate cameraRotate;  // CameraRotate
     [SerializeField] private AudioClip fireBellSoundClip;//fireBellSound
 
+    public GameObject eleText; //elevator text
+
     private void Start()
     {
         itemAudio = GetComponent<AudioSource>();
@@ -86,6 +88,10 @@ public class ActionController : MonoBehaviour
             {
                 Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 했습니다."); // 인벤토리 넣기
 
+                if(hitInfo.transform.CompareTag("ele"))
+                {
+                    eleText.SetActive(true);
+                }
                 if (hitInfo.transform.CompareTag("FireBell"))
                 {
                     gameManager.bellCheck = true;
