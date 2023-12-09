@@ -9,6 +9,8 @@ public class LoadingSceneContorller : MonoBehaviour
     static string nextScene;
     [SerializeField]
     Image progressBar;
+    [SerializeField] private Text[] texts;
+    private int randomIndex;
 
     public static void LoadScene(string sceneName)
     {
@@ -18,6 +20,8 @@ public class LoadingSceneContorller : MonoBehaviour
     void Start()
     {
         progressBar.fillAmount = 0f;
+        randomIndex = Random.Range(0, texts.Length);
+        texts[randomIndex].gameObject.SetActive(true);
         StartCoroutine(LoadSceneProcess());
     }
 
@@ -30,7 +34,7 @@ public class LoadingSceneContorller : MonoBehaviour
 
         while (progress < 1f)
         {
-            progress += Time.deltaTime / 2f;
+            progress += Time.deltaTime / 4f;
             progressBar.fillAmount = progress;
             yield return null;
         }
