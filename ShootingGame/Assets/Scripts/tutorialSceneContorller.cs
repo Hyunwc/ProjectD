@@ -22,9 +22,6 @@ public class tutorialSceneContorller : MonoBehaviour
     public int DestroyMonster = 0;
     public int DestoryFire = 0;
 
-    public AudioClip QuestSound;
-    private AudioSource Questaudio;
-
     public Text timeText;
     private void Start()
     {
@@ -35,7 +32,7 @@ public class tutorialSceneContorller : MonoBehaviour
         tply.isMove = false;
         tply.isShot = false;
         tutorialText[idx].SetActive(true);
-        Questaudio = GetComponent<AudioSource>();
+
         StartCoroutine(TutorialStart());
         timeText.text = "00:00";
     }
@@ -173,7 +170,6 @@ public class tutorialSceneContorller : MonoBehaviour
         for (int i = 0; i < tutorialText.Length; i++)
         {
             tutorialText[i].SetActive(i == idx);
-            Questaudio.PlayOneShot(QuestSound);
         }
     }
 
