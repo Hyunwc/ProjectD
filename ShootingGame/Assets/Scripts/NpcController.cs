@@ -10,10 +10,14 @@ public class NpcController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator npcAni;
 
+    public int NpcCount = 0;
+    private C2Quest quest;
+
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         npcAni = GetComponent<Animator>();
+        quest = FindObjectOfType<C2Quest>();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -22,6 +26,11 @@ public class NpcController : MonoBehaviour
         {
             MoveToDestination();
         }
+        else if (collision.gameObject.CompareTag("Exit"))
+        {
+            quest.NpcCount++;
+            gameObject.SetActive(false);
+        }
     }
 
     void MoveToDestination()
@@ -29,7 +38,7 @@ public class NpcController : MonoBehaviour
         if (targetDestination != null)
         {
             navMeshAgent.SetDestination(targetDestination.position);
-            npcAni.SetBool("Run", true);
+            npcAni.SetBool("isRun", true);
         }
     }
 }

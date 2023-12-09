@@ -60,6 +60,12 @@ public class ClickManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("Game");
     }
+    public void Ch2ReStart()
+    {
+        clickaudio.PlayOneShot(clickSound);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("tunnel");
+    }
     public void Quit()
     {
         clickaudio.PlayOneShot(clickSound);
