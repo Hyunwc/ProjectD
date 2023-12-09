@@ -63,8 +63,6 @@ public class PlayerMove : MonoBehaviour
 
         InputEvent();
     }
-
-
     void Move()
     {
         //방향키 또는 wasd키 입력을 숫자로 받아서 저장
@@ -194,7 +192,11 @@ public class PlayerMove : MonoBehaviour
             isMedi = false;
         }
     }
-
+    //IEnumerator ShotDelay()
+    //{
+    //    yield return new WaitForSeconds(0.5f);
+       
+    //}
     void ManageMoveSound(bool isMoving)
     {
        
