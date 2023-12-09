@@ -12,12 +12,15 @@ public class PlayerFire : MonoBehaviour
     private LineRenderer lineRenderer;
     private float fireDistance = 100f;
 
+    public AudioClip shotSound;
+    private AudioSource shotaudio;
+
     //public Fire fire;
     // Start is called before the first frame update
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-
+        shotaudio = GetComponent<AudioSource>();
         lineRenderer.enabled = false;
         lineRenderer.positionCount = 2;
         //fire = FindObjectOfType<Fire>();
@@ -65,6 +68,7 @@ public class PlayerFire : MonoBehaviour
     //라인렌더러 형태의 총알궤적을 생성하는 코루틴
     public IEnumerator ShotEffect(Vector3 hitposition)
     {
+        shotaudio.PlayOneShot(shotSound);
         lineRenderer.SetPosition(0, fireTransform.position);
         lineRenderer.SetPosition(1, hitposition);
         lineRenderer.enabled = true;
