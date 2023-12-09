@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     private PlayerMove ply;
     private float delay = 3f;
 
+    public bool isQuest1Complete = false;
+    public bool isQuest2Complete = false;
+    public bool isQuest3Complete = false;
+
     public bool bellCheck = false;
     public Text timeText;
     // Start is called before the first frame update
