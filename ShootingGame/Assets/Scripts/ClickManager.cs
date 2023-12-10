@@ -59,6 +59,8 @@ public class ClickManager : MonoBehaviour
         clickaudio.PlayOneShot(clickSound);
         Time.timeScale = 1;
         SceneManager.LoadScene("Game");
+        Enemy.enemyDestroy = 0;
+        Fire.fireDestroy = 0;
     }
     public void Ch2ReStart()
     {

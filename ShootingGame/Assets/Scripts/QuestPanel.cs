@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class QuestPanel : MonoBehaviour
 {
-    [SerializeField] private Text Quest1;
-    [SerializeField] private Text Quest2;
-    [SerializeField] private Text Quest3;
+    public Text Quest1;
+     public Text Quest2;
+     public Text Quest3;
+     public Text Quest4;
 
-    [SerializeField] private GameObject checkbox1;
-    [SerializeField] private GameObject checkbox2;
-    [SerializeField] private GameObject checkbox3;
+     public GameObject checkbox1;
+    public GameObject checkbox2;
+     public GameObject checkbox3;
+     public GameObject checkbox4;
 
     private GameManager gameManager;
 
@@ -19,6 +21,8 @@ public class QuestPanel : MonoBehaviour
     private AudioSource Questaudio;
     //private AudioSource firebell;
     //private bool firebellPlayed = false;
+
+    public int elepoint =0;
 
     void Start()
     {
@@ -39,6 +43,7 @@ public class QuestPanel : MonoBehaviour
         Quest1.text = " 화재경보기 누르기 ";
         Quest2.text = " 화재 진압하기 " + Fire.fireDestroy + " / 10 ";
         Quest3.text = " 몬스터 제압하기 " + Enemy.enemyDestroy + " / 3 ";
+        Quest4.text = " 엘리베이터 탑승하지 않기 ";
 
         if (gameManager.bellCheck == true && gameManager.isQuest1Complete == false)
         {
@@ -60,6 +65,12 @@ public class QuestPanel : MonoBehaviour
             Questaudio.PlayOneShot(QuestSound);
             checkbox3.SetActive(true);
             gameManager.isQuest3Complete = true;
+        }
+        if ( elepoint >= 1 && gameManager.isQuest4Complete == false)
+        {
+            Questaudio.PlayOneShot(QuestSound);
+            checkbox4.SetActive(true);
+            gameManager.isQuest4Complete = true;
         }
         //if() 화재경보기 소리가 1번 울리면 체크, Fire 진압 10회 카운트 체크
 
