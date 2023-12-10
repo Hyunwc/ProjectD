@@ -33,11 +33,14 @@ public class ActionController : MonoBehaviour
     public GameObject eleText; //elevator text
     public Text eleText1;
 
+    private QuestPanel questPanel;
+
 
     private void Start()
     {
         itemAudio = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManager>();
+        questPanel = FindObjectOfType<QuestPanel>();
     }
     void Update()
     {
@@ -49,10 +52,15 @@ public class ActionController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 eleText1.text = "엘리베이터를 탑승하면 안됩니다!";
+
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
+                questPanel.elepoint++;
                 eleText.SetActive(false);
+                /*questPanel.checkbox4.SetActive(true);
+                questPanel.Quest4.text = "<color=#2FFF00>" + " 엘리베이터 탑승하지 않기 " + "</color>";
+                gameManager.isQuest4Complete = true;*/
             }
         } 
  
@@ -180,7 +188,6 @@ public class ActionController : MonoBehaviour
                     playerMove.enabled = false; // 플레이어 조작 비활성화
                     playerfire.enabled = false;
                     //cameraRotate.enabled = false;
-
                 }
 
             }

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public bool isQuest1Complete = false;
     public bool isQuest2Complete = false;
     public bool isQuest3Complete = false;
+    public bool isQuest4Complete = false;
+    public bool isQuest5Complete = false;
 
     public bool bellCheck = false;
     public Text timeText;
