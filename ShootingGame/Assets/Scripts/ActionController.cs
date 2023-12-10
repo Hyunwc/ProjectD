@@ -10,7 +10,7 @@ public class ActionController : MonoBehaviour
     private GameManager gameManager;
 
     private bool pickupActivated = false;  // 아이템 습득 가능할시 True 
-    private RaycastHit hitInfo;  // 충돌체 정보 저장
+    public RaycastHit hitInfo;  // 충돌체 정보 저장
     public GameObject handle;
     //private bool state = false;
     public Slider hpBar;
