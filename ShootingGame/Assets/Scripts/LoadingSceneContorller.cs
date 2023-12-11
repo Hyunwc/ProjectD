@@ -23,6 +23,8 @@ public class LoadingSceneContorller : MonoBehaviour
         randomIndex = Random.Range(0, texts.Length);
         texts[randomIndex].gameObject.SetActive(true);
         StartCoroutine(LoadSceneProcess());
+        Enemy.enemyDestroy = 0;
+        Fire.fireDestroy = 0;
     }
 
     IEnumerator LoadSceneProcess()

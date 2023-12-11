@@ -14,12 +14,12 @@ public class Inventory : MonoBehaviour
     //[SerializeField] private WeaponManger WManager; 
 
     private Slot[] slots;  // ΩΩ∑‘ πËø≠
-    private int slotnum; // ¿Œ∫•≈‰∏Æ ΩΩ∑‘ ¿Œµ¶Ω∫
+    //private int slotnum; // ¿Œ∫•≈‰∏Æ ΩΩ∑‘ ¿Œµ¶Ω∫
 
     void Start()
     {
         slots = SlotsParent.GetComponentsInChildren<Slot>();
-        slotnum = 0;
+        //slotnum = 0;
     }
 
     void Update()

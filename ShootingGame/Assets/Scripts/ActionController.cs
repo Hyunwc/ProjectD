@@ -102,6 +102,7 @@ public class ActionController : MonoBehaviour
 
     private void CheckItem()
     {
+
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
             if (hitInfo.transform.tag != null) // 해당하는 tag의 경우에만 획득 가능하다는 text 출력, CompareTag("")
@@ -110,7 +111,12 @@ public class ActionController : MonoBehaviour
             }
         }
         else
+        {
             ItemInfoDisappear(); // Item이 아닐 시 text 출력x
+        }
+
+
+
     }
 
     private void ItemInfoAppear() // 아이템 정보 text 출력 
@@ -123,11 +129,10 @@ public class ActionController : MonoBehaviour
     private void ItemInfoDisappear()
     {
         pickupActivated = false;
-        actionText.gameObject.SetActive(false);
-
 
         if (actionText != null)
         {
+
             actionText.gameObject.SetActive(false);
         }
     }
