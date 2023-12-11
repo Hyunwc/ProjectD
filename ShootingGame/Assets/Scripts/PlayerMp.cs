@@ -10,7 +10,7 @@ public class PlayerMp : MonoBehaviour
     private float[] co2s = { 2f, 2.5f, 3f };
     private float[] hps = { 1f, 2f, 3f };
     public GameObject Co2Panel;
-
+    public bool isWater = false;
     public PlayerHp playerhp;
     void Start()
     {
@@ -20,22 +20,32 @@ public class PlayerMp : MonoBehaviour
 
     void Update()
     {
-        playerhp.hp -= Time.deltaTime;
+        //playerhp.hp -= Time.deltaTime;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("CO2")) // CO2와 충돌시 
+        if (other.CompareTag("CO2") && !isWater) // CO2와 충돌시 
         {
+            
             Co2Panel.SetActive(true);
             StartCoroutine(CO2zone());
         }
-        else
+        //else
+        //{
+        //    Co2Panel.SetActive(false);
+        //    StopCoroutine("CO2zone");
+        //}
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CO2")) // CO2를 벗어날 때
         {
             Co2Panel.SetActive(false);
             StopCoroutine("CO2zone");
         }
     }
+
 
     IEnumerator CO2zone()
     {

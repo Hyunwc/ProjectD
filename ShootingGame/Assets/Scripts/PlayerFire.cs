@@ -14,11 +14,13 @@ public class PlayerFire : MonoBehaviour
 
     public AudioClip shotSound;
     private AudioSource shotaudio;
+    //public Animator shotAni;
 
     //public Fire fire;
     // Start is called before the first frame update
     private void Awake()
     {
+        //shotAni = GetComponent<Animator>();
         lineRenderer = GetComponent<LineRenderer>();
         shotaudio = GetComponent<AudioSource>();
         lineRenderer.enabled = false;
@@ -31,7 +33,7 @@ public class PlayerFire : MonoBehaviour
        
         RaycastHit hit;
         Vector3 hitPosition = Vector3.zero;
-
+        //shotAni.SetTrigger("Shot");
         int layerMask = 1 << LayerMask.NameToLayer("Co2");
         layerMask = ~layerMask; // 이산화탄소 오브젝트 레이어를 제외한 모든 레이어를 대상으로 레이캐스트
 
