@@ -11,17 +11,17 @@ public class FireEx : MonoBehaviour
     private float capacity = 100f; // 초기용량
     private PlayerMove playM;
 
-    public AudioSource launchSound; // 발사 소리
+    //public AudioSource launchSound; // 발사 소리
     private bool isPlayingSound = false;
     [SerializeField] private GameObject FireTrigger;
 
-    public AudioClip fireExSound;
-    public AudioSource fireExaudio;
+    //public AudioClip fireExSound;
+    //public AudioSource fireExaudio;
 
     private void Start()
     {
-        fireExaudio = GetComponent<AudioSource>();
-        fireExaudio.clip = fireExSound;
+       // fireExaudio = GetComponent<AudioSource>();
+        //fireExaudio.clip = fireExSound;
         fireExPt.Stop();
         capacityText.text = "소화기\n현재 용량\n" + capacity + "%";
         playM = FindObjectOfType<PlayerMove>();
@@ -33,8 +33,8 @@ public class FireEx : MonoBehaviour
  
         fireExPt.Play();
         FireTrigger.SetActive(true);
-        fireExaudio.Play();
-        Debug.Log("Playing sound: " + fireExaudio.isPlaying);
+        //fireExaudio.Play();
+        //Debug.Log("Playing sound: " + fireExaudio.isPlaying);
         isPlayingSound = true;
         StartCoroutine(StopParticleAfterShot());
 
@@ -71,7 +71,7 @@ public class FireEx : MonoBehaviour
         fireExPt.Stop(); // 마우스가 놓여지면 파티클을 정지합니다.
         if (!Input.GetMouseButton(0))
         {
-            fireExaudio.Stop();
+           // fireExaudio.Stop();
         }
         //if (isPlayingSound)
         //{

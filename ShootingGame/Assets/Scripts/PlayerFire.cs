@@ -32,7 +32,10 @@ public class PlayerFire : MonoBehaviour
         RaycastHit hit;
         Vector3 hitPosition = Vector3.zero;
 
-        if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance))
+        int layerMask = 1 << LayerMask.NameToLayer("Co2");
+        layerMask = ~layerMask; // 이산화탄소 오브젝트 레이어를 제외한 모든 레이어를 대상으로 레이캐스트
+
+        if (Physics.Raycast(fireTransform.position, fireTransform.forward, out hit, fireDistance, layerMask))
         {
             if (hit.transform.tag == "Enemy")
             {

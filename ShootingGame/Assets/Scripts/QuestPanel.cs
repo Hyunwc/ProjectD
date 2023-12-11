@@ -78,11 +78,11 @@ public class QuestPanel : MonoBehaviour
             checkbox4.SetActive(true);
             gameManager.isQuest4Complete = true;
         }
-        if (actionController.hitInfo.transform.CompareTag("FireExt") && gameManager.isQuest5Complete == false)
-        {
-            checkbox5.SetActive(true);
-            gameManager.isQuest5Complete = true;
-        }
+        //if (actionController.hitInfo.transform.CompareTag("FireExt") && gameManager.isQuest5Complete == false)
+        //{
+        //    checkbox5.SetActive(true);
+        //    gameManager.isQuest5Complete = true;
+        //}
         //if() 화재경보기 소리가 1번 울리면 체크, Fire 진압 10회 카운트 체크
 
     }
