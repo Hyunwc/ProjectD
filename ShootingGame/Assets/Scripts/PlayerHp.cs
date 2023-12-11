@@ -26,15 +26,20 @@ public class PlayerHp : MonoBehaviour
         //체력바에 체력 표시
         hpBar.value = hp;
 
+        die();
+    }
+
+    public void die()
+    {
         if (hp <= 0)
         {
             diePanel.SetActive(true);
             cameraRotate.isPause = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            
+
             Time.timeScale = 0;
-            
+
         }
     }
     public void Heal(float heal)

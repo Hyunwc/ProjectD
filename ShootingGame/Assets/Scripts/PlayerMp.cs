@@ -7,11 +7,20 @@ public class PlayerMp : MonoBehaviour
     public float mp = 0;
     public Slider mpBar;
     public Slider hpBar;
-    public float[] co2s = { 0.5f, 0.05f, 0.1f };
+    private float[] co2s = { 2f, 2.5f, 3f };
+    private float[] hps = { 1f, 2f, 3f };
     public GameObject Co2Panel;
+
+    public PlayerHp playerhp;
     void Start()
     {
         mpBar.value = mp;
+        playerhp = FindObjectOfType<PlayerHp>();
+    }
+
+    void Update()
+    {
+        playerhp.hp -= Time.deltaTime;
     }
 
     private void OnTriggerStay(Collider other)
@@ -24,27 +33,36 @@ public class PlayerMp : MonoBehaviour
         else
         {
             Co2Panel.SetActive(false);
+            StopCoroutine("CO2zone");
         }
     }
 
-    private IEnumerator CO2zone()
+    IEnumerator CO2zone()
     {
         mp += Time.deltaTime;
         mpBar.value = mp;
 
+        playerhp.hpBar.value = playerhp.hp;
+
         if (mp >= 30 && mp <= 50) // 30 ~ 50 구간 피 감소
         {
+            playerhp.hp -= Time.deltaTime;
             hpBar.value -= Time.deltaTime;
+            //playerhp.die();
         }
         else if (mp >= 50 && mp <= 70) // 50 ~ 70 구간 피 감소
         {
-            hpBar.value -= co2s[1];
-            yield return new WaitForSeconds(0.6f);
+            playerhp.hp -= Time.deltaTime;
+            hpBar.value -= hps[1];
+            //playerhp.die();
         }
         else if (mp >= 70 && mp <= 100) // 70 ~ 100 구간 피 감소
         {
-            hpBar.value -= co2s[2];
-            yield return new WaitForSeconds(0.7f);
+            playerhp.hp -= Time.deltaTime;
+            hpBar.value -= hps[2];
+            //playerhp.die();
         }
+        playerhp.die();
+        yield return new WaitForSeconds(playerhp.hp);
     }
 }

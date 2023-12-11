@@ -36262,7 +36262,7 @@ MonoBehaviour:
   checkbox4: {fileID: 1157970082}
   checkbox5: {fileID: 2062362834}
   QuestSound: {fileID: 8300000, guid: 5bb9c8ee9158dbf4795d123cef6c6216, type: 3}
-  actionController: {fileID: 0}
+  actionController: {fileID: 963194230}
   elepoint: 0
 --- !u!82 &963194232
 AudioSource:
@@ -70861,7 +70861,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900079785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -45.35, y: 0.6, z: -36.04}
+  m_LocalPosition: {x: -45.35, y: 0.982, z: -36.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70916,11 +70916,8 @@ MonoBehaviour:
   mp: 0
   mpBar: {fileID: 1996744524}
   hpBar: {fileID: 419854186}
-  co2s:
-  - 0.5
-  - 0.05
-  - 0.1
   Co2Panel: {fileID: 1151263926}
+  playerhp: {fileID: 1900079792}
 --- !u!82 &1900079794
 AudioSource:
   m_ObjectHideFlags: 0
