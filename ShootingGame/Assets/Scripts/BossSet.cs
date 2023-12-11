@@ -9,12 +9,14 @@ public class BossSet : MonoBehaviour
     public Camera subCamera;
 
     public Boss bossInfo;
-
+    public GameObject bossHP;
     private PlayerMove ply;
-
+    private SoundManager soundManager;
     private void Start()
     {
+       
         ply = FindObjectOfType<PlayerMove>();
+        soundManager = FindObjectOfType<SoundManager>();
         bossInfo.hp = 0;
     }
 
@@ -38,7 +40,9 @@ public class BossSet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        {        
+        {
+            soundManager.bossSet = true;
+            bossHP.SetActive(true);
             boss.SetActive(true);
             bossInfo.canMove = false;
 
