@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,12 +15,14 @@ public class PlayerMove : MonoBehaviour
 
     public PlayerFire gun;
     public FireEx fireEx;
-    public GameObject waterPaper;
+    public WaterPaper waterPaper;
     public Medicine medicine;
     public AudioSource moveSound; // 발소리 사운드
     bool isMoving; // 플레이어가 움직이는지 여부
     public AudioSource jumpSound;//점프 사운드
     bool isJumping = false; // 점프 중 여부 확인
+
+    private PlayerMp plymp;
 
     private float gunCount; //남은 총알
     //private float maxgunCount = 8; //최대 총알
@@ -38,6 +41,8 @@ public class PlayerMove : MonoBehaviour
     private CameraRotate rotateToMouse;
     [SerializeField] private GameObject FirePanel;
     private NewInventory newInven;
+
+  
    
     void Start()
     {
@@ -49,6 +54,8 @@ public class PlayerMove : MonoBehaviour
         //gun = GetComponent<PlayerFire>();
         rotateToMouse = GetComponent<CameraRotate>();
         newInven = FindObjectOfType<NewInventory>();
+        plymp = GetComponent<PlayerMp>();
+        
     }
 
     // Update is called once per frame
@@ -102,7 +109,7 @@ public class PlayerMove : MonoBehaviour
         {
             newInven.ChangeSlot(0);
             gun.gameObject.SetActive(true);
-            waterPaper.SetActive(false);
+            waterPaper.gameObject.SetActive(false);
             //waterGunPanel.SetActive(true);
             fireEx.gameObject.SetActive(false);
             medicine.gameObject.SetActive(false);
@@ -116,7 +123,7 @@ public class PlayerMove : MonoBehaviour
             newInven.ChangeSlot(1);
             gun.gameObject.SetActive(false);
             //waterGunPanel.SetActive(false);
-            waterPaper.SetActive(false);
+            waterPaper.gameObject.SetActive(false);
             fireEx.gameObject.SetActive(true);
             medicine.gameObject.SetActive(false);
             isGun = false;
@@ -130,7 +137,7 @@ public class PlayerMove : MonoBehaviour
             gun.gameObject.SetActive(false);
             fireEx.gameObject.SetActive(false);
             medicine.gameObject.SetActive(false);
-            waterPaper.SetActive(true);
+            waterPaper.gameObject.SetActive(true);
             isGun = false;
             isFireEx = false;
             isWaterPaper = true;
@@ -142,7 +149,7 @@ public class PlayerMove : MonoBehaviour
             gun.gameObject.SetActive(false);
             fireEx.gameObject.SetActive(false);
             medicine.gameObject.SetActive(true);
-            waterPaper.SetActive(false);
+            waterPaper.gameObject.SetActive(false);
             isGun = false;
             isFireEx = false;
             isWaterPaper = false;
@@ -158,8 +165,13 @@ public class PlayerMove : MonoBehaviour
                 UpdateBulletUI();
                 Debug.Log("현재 총알수 : " + gunCount);
             }
-
         }
+        else if (Input.GetMouseButtonDown(1) && isWaterPaper) // 오른쪽 마우스 버튼을 눌렀을 때
+        {
+            plymp.isWater = !plymp.isWater;
+            waterPaper.isUsing = !waterPaper.isUsing;
+        }
+        
         else if (Input.GetMouseButton(0) && isFireEx)
         {
             if (isShot)

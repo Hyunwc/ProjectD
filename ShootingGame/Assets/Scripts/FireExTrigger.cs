@@ -31,16 +31,17 @@ public class FireExTrigger : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();
-            //TutorialEnemy t_enemy = other.GetComponent<TutorialEnemy>();
+            TutorialEnemy t_enemy = other.GetComponent<TutorialEnemy>();
             if (enemy != null)
             {
                 enemy.Damaged(1f);
             }
-            //else if(t_enemy != null)
-            //{
-            //    t_enemy.Damaged(1f);
-            //}
+            else if (t_enemy != null)
+            {
+                t_enemy.Damaged(1f);
+            }
         }
+        
         else if(other.CompareTag("Boss"))
         {
             boss.Damaged(1f);

@@ -912,6 +912,7 @@ MonoBehaviour:
   mpBar: {fileID: 636336468}
   hpBar: {fileID: 2066959902}
   Co2Panel: {fileID: 167196727}
+  isWater: 0
   playerhp: {fileID: 0}
 --- !u!114 &44670448
 MonoBehaviour:
@@ -4148,7 +4149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f1328403234aedb47bbb2e10c8a6477e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1489170624299286622, guid: f1328403234aedb47bbb2e10c8a6477e, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -14328,8 +14329,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uBAA8\uB4E0 \uBAAC\uC2A4\uD130 \uBC0F \uD654\uC7AC\uB97C\n\uC9C4\uC555\uD558\uACE0
-    \uCD9C\uAD6C\uB85C \uC774\uB3D9\uD574\uC8FC\uC138\uC694!"
+  m_Text: "\uBAA8\uB4E0 \uBAAC\uC2A4\uD130\uB97C \uC81C\uC555\uD558\uACE0\n\uCD9C\uAD6C\uB85C
+    \uC774\uB3D9\uD558\uC138\uC694!"
 --- !u!222 &1395191142
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19952,7 +19953,7 @@ MonoBehaviour:
   MiddleDoor: {fileID: 832335617}
   lastDoor: {fileID: 2072135243}
   DestroyMonster: 0
-  DestoryFire: 0
+  DestroyFire: 0
   QuestSound: {fileID: 8300000, guid: 5bb9c8ee9158dbf4795d123cef6c6216, type: 3}
   timeText: {fileID: 1477825826}
 --- !u!4 &2045364723

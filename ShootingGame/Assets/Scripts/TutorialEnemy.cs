@@ -44,7 +44,7 @@ public class TutorialEnemy : MonoBehaviour
         tuto = FindObjectOfType<tutorialSceneContorller>();
     }
 
-    void Damaged(float damage)
+    public void Damaged(float damage)
     {
         //공격 받은만큼 체력 감소
         hp -= damage;

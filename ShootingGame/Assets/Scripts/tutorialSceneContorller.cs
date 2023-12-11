@@ -20,7 +20,7 @@ public class tutorialSceneContorller : MonoBehaviour
     public GameObject MiddleDoor;
     public GameObject lastDoor;
     public int DestroyMonster = 0;
-    public int DestoryFire = 0;
+    public int DestroyFire = 0;
 
     public AudioClip QuestSound;
     private AudioSource Questaudio;
