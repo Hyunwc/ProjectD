@@ -22,6 +22,7 @@ TagManager:
   - TargetMisslie
   - Boss
   - ele
+  - npc
   layers:
   - Default
   - TransparentFX
