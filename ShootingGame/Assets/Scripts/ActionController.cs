@@ -51,16 +51,13 @@ public class ActionController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                eleText1.text = "엘리베이터를 탑승하면 안됩니다!";
+                eleText1.text = "화재 상황에선\n 엘리베이터를 탑승하면 안됩니다! ";
 
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 questPanel.elepoint++;
                 eleText.SetActive(false);
-                /*questPanel.checkbox4.SetActive(true);
-                questPanel.Quest4.text = "<color=#2FFF00>" + " 엘리베이터 탑승하지 않기 " + "</color>";
-                gameManager.isQuest4Complete = true;*/
             }
         } 
  
@@ -75,25 +72,36 @@ public class ActionController : MonoBehaviour
         }
     }
 
-    private void PlayMode() // Player 제한을 해제하고 다시 움직이게끔 
+    private void PlayMode()
     {
-        actionText.enabled = true; // 텍스트 보이게
+        actionText.enabled = true;
 
-        Cursor.visible = false; // 커서 숨기기
-        /*playerMove.enabled = true; // 플레이어 조작 활성화
-        playerfire.enabled = true;
-        cameraRotate.enabled = true; */
+        Cursor.visible = false;
+        if (playerMove != null)
+        {
+            playerMove.enabled = true;
+        }
+        if (playerfire != null)
+        {
+            playerfire.enabled = true;
+        }
     }
 
-    private void DisappearPanel() // FireExtPanel을 비활성화
+    private void DisappearPanel()
     {
-        FireExtPanel.SetActive(false);
-        FireExt2.SetActive(false);
+        if (FireExtPanel != null)
+        {
+            FireExtPanel.SetActive(false);
+        }
+        if (FireExt2 != null)
+        {
+            FireExt2.SetActive(false);
+        }
     }
 
-        private void TryAction()
+    private void TryAction()
     {
-        if (Input.GetKeyDown(KeyCode.E)) // E키 입력 시
+        if (Input.GetKeyDown(KeyCode.E))
         {
             CheckItem();
             CanPickUp();
@@ -102,7 +110,6 @@ public class ActionController : MonoBehaviour
 
     private void CheckItem()
     {
-
         if (Physics.Raycast(transform.position, transform.forward, out hitInfo, range, layerMask))
         {
             if (hitInfo.transform.tag != null) // 해당하는 tag의 경우에만 획득 가능하다는 text 출력, CompareTag("")
@@ -115,24 +122,26 @@ public class ActionController : MonoBehaviour
             ItemInfoDisappear(); // Item이 아닐 시 text 출력x
         }
 
-
-
     }
-
-    private void ItemInfoAppear() // 아이템 정보 text 출력 
+    private void ItemInfoAppear()
     {
         pickupActivated = true;
-        actionText.gameObject.SetActive(true);
-        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "<color=yellow>" + " (E) " + "</color>";
+        if (actionText != null)
+        {
+            actionText.gameObject.SetActive(true);
+            ItemPickUp itemPickUp = hitInfo.transform.GetComponent<ItemPickUp>();
+            if (itemPickUp != null && itemPickUp.item != null)
+            {
+                actionText.text = itemPickUp.item.itemName + "<color=yellow>" + " (E) " + "</color>";
+            }
+        }
     }
-
     private void ItemInfoDisappear()
     {
         pickupActivated = false;
 
         if (actionText != null)
         {
-
             actionText.gameObject.SetActive(false);
         }
     }
@@ -159,11 +168,6 @@ public class ActionController : MonoBehaviour
                     {
                         fireBellAudio.Play();
                     }
-                }
-                else
-                {
-                    //theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
-                    //Destroy(hitInfo.transform.gameObject);
                 }
 
                 ItemInfoDisappear();
