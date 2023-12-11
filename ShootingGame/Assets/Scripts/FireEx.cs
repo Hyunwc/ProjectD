@@ -65,13 +65,15 @@ public class FireEx : MonoBehaviour
                 capacityText.text = "소화기\n용량 부족\n사용 불가";
                 // Destroy(gameObject); //소화기 파괴
                 break;
+
             }
         }
+
         FireTrigger.SetActive(false);
         fireExPt.Stop(); // 마우스가 놓여지면 파티클을 정지합니다.
         if (!Input.GetMouseButton(0))
         {
-           // fireExaudio.Stop();
+            // fireExaudio.Stop();
         }
         //if (isPlayingSound)
         //{

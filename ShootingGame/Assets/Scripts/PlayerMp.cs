@@ -7,8 +7,7 @@ public class PlayerMp : MonoBehaviour
     public float mp = 0;
     public Slider mpBar;
     public Slider hpBar;
-    private float[] co2s = { 2f, 2.5f, 3f };
-    private float[] hps = { 1f, 2f, 3f };
+    private float[] hps = { 1f, 2f, 2.5f };
     public GameObject Co2Panel;
     public bool isWater = false;
     public PlayerHp playerhp;
@@ -18,24 +17,14 @@ public class PlayerMp : MonoBehaviour
         playerhp = FindObjectOfType<PlayerHp>();
     }
 
-    void Update()
-    {
-        //playerhp.hp -= Time.deltaTime;
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("CO2") && !isWater) // CO2와 충돌시 
+        if (other.CompareTag("CO2") && !isWater) //CO2와 충돌시 
         {
-            
+
             Co2Panel.SetActive(true);
             StartCoroutine(CO2zone());
         }
-        //else
-        //{
-        //    Co2Panel.SetActive(false);
-        //    StopCoroutine("CO2zone");
-        //}
     }
     private void OnTriggerExit(Collider other)
     {
@@ -46,31 +35,25 @@ public class PlayerMp : MonoBehaviour
         }
     }
 
-
     IEnumerator CO2zone()
     {
         mp += Time.deltaTime;
         mpBar.value = mp;
 
         playerhp.hpBar.value = playerhp.hp;
+        playerhp.hp -= Time.deltaTime * 0.5f;
 
         if (mp >= 30 && mp <= 50) // 30 ~ 50 구간 피 감소
         {
             playerhp.hp -= Time.deltaTime;
-            hpBar.value -= Time.deltaTime;
-            //playerhp.die();
         }
         else if (mp >= 50 && mp <= 70) // 50 ~ 70 구간 피 감소
         {
-            playerhp.hp -= Time.deltaTime;
-            hpBar.value -= hps[1];
-            //playerhp.die();
+            playerhp.hp -= Time.deltaTime * hps[1];
         }
-        else if (mp >= 70 && mp <= 100) // 70 ~ 100 구간 피 감소
+        else if (mp >= 70) // 70 ~ 100 구간 피 감소
         {
-            playerhp.hp -= Time.deltaTime;
-            hpBar.value -= hps[2];
-            //playerhp.die();
+            playerhp.hp -= Time.deltaTime * hps[2];
         }
         playerhp.die();
         yield return new WaitForSeconds(playerhp.hp);
