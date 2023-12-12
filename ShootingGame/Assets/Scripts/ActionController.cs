@@ -32,6 +32,7 @@ public class ActionController : MonoBehaviour
 
     public GameObject eleText; //elevator text
     public Text eleText1;
+    public int eletextpoint = 0;
 
     private QuestPanel questPanel;
 
@@ -49,13 +50,18 @@ public class ActionController : MonoBehaviour
 
         if (eleText.activeSelf) //FIreExtPanel이 활성화된 상태에서만 F키를 입력받음 
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            
+            if (Input.GetKeyDown(KeyCode.Alpha1) && eletextpoint == 0)
             {
-                eleText1.text = "화재 상황에선\n 엘리베이터를 탑승하면 안됩니다! ";
+                eletextpoint = 1;
+                eleText1.text = "화재 상황에선\n 엘리베이터를 탑승하면 안됩니다! " + "<color=yellow>" + " (X) " + "</color>";
 
+                if (eletextpoint ==1)
+                    Invoke("DeactivateEleText", 3f);
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && eletextpoint == 0)
             {
+                eletextpoint =2;
                 questPanel.elepoint++;
                 eleText.SetActive(false);
             }
@@ -70,6 +76,12 @@ public class ActionController : MonoBehaviour
                 PlayMode();
             }
         }
+    }
+
+
+    void DeactivateEleText()
+    {
+        eleText.SetActive(false);
     }
 
     private void PlayMode()
@@ -119,6 +131,8 @@ public class ActionController : MonoBehaviour
         }
         else
         {
+            actionText.text = null;
+
             ItemInfoDisappear(); // Item이 아닐 시 text 출력x
         }
 
@@ -156,7 +170,9 @@ public class ActionController : MonoBehaviour
 
                 if(hitInfo.transform.CompareTag("ele"))
                 {
+                    eletextpoint = 0;
                     eleText.SetActive(true);
+                    eleText1.text = "엘리베이터를 탑승하시겠습니까 ?\n1. 타고 내려간다                2. 타지 않는다";
                 }
 
                 if (hitInfo.transform.CompareTag("FireBell"))
