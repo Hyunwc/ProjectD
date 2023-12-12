@@ -73,7 +73,6 @@ public class ActionController : MonoBehaviour
             {
                 DisappearPanel();
                 fireextinguisher.SetActive(true);
-                PlayMode();
             }
         }
     }
@@ -84,20 +83,17 @@ public class ActionController : MonoBehaviour
         eleText.SetActive(false);
     }
 
-    private void PlayMode()
+    
+    /*private void PlayMode()
     {
         actionText.enabled = true;
 
         Cursor.visible = false;
-        if (playerMove != null)
-        {
+
             playerMove.enabled = true;
-        }
-        if (playerfire != null)
-        {
             playerfire.enabled = true;
-        }
-    }
+
+    } */
 
     private void DisappearPanel()
     {
@@ -210,9 +206,10 @@ public class ActionController : MonoBehaviour
 
                     Cursor.lockState = CursorLockMode.None;  // 커서 잠금 해제 
                     Cursor.visible = true; // 커서 보이게
-                    playerMove.enabled = false; // 플레이어 조작 비활성화
-                    playerfire.enabled = false;
+                    //playerMove.enabled = false; // 플레이어 조작 비활성화
+                    //playerfire.enabled = false;
                     //cameraRotate.enabled = false;
+                    Destroy(hitInfo.transform.gameObject);
                 }
 
             }
