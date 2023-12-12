@@ -9771,9 +9771,8 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\uC5D8\uB9AC\uBCA0\uC774\uD130\uB97C \uD0D1\uC2B9\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?\n\n1.
-    \uD0C0\uACE0 \uB0B4\uB824\uAC04\uB2E4 \t\t\t2. \uD0C0\uC9C0 \uC54A\uB294\uB2E4"
+    m_LineSpacing: 1.3
+  m_Text: 
 --- !u!222 &258219670
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23644,7 +23643,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 623476935}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -37202,6 +37201,7 @@ MonoBehaviour:
   fireextinguisher: {fileID: 0}
   eleText: {fileID: 1043334322}
   eleText1: {fileID: 258219669}
+  eletextpoint: 0
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
