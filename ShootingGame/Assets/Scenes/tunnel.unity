@@ -7815,7 +7815,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &503894814
@@ -9665,6 +9665,7 @@ MonoBehaviour:
   mpBar: {fileID: 773932777}
   hpBar: {fileID: 642211636}
   Co2Panel: {fileID: 1262315066}
+  isWater: 0
   playerhp: {fileID: 0}
 --- !u!114 &624318421
 MonoBehaviour:
@@ -10688,7 +10689,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &659163149
@@ -16305,7 +16306,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &994781411
@@ -17858,7 +17859,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1080963367
@@ -18011,7 +18012,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1093523606
@@ -18770,7 +18771,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1123107714
@@ -23400,7 +23401,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1394347385
@@ -24069,7 +24070,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1434383204
@@ -25758,7 +25759,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1574843561
@@ -26472,7 +26473,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1651027669
@@ -28399,7 +28400,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1748524554
@@ -28504,6 +28505,7 @@ MonoBehaviour:
   fireextinguisher: {fileID: 0}
   eleText: {fileID: 0}
   eleText1: {fileID: 0}
+  eletextpoint: 0
 --- !u!81 &1751735667
 AudioListener:
   m_ObjectHideFlags: 0
@@ -28794,7 +28796,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1759720902
@@ -29322,7 +29324,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1774853352
@@ -29716,7 +29718,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1782900408
@@ -31023,7 +31025,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1880227535
@@ -32003,7 +32005,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1948755992
@@ -34420,7 +34422,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &2110768942
@@ -34910,7 +34912,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &2130763782
