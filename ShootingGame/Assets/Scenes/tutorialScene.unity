@@ -3009,7 +3009,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &257580975
@@ -9124,7 +9124,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &933840359
@@ -12026,7 +12026,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.6674617
-  m_BaseOffset: 0.33373085
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &1225299112
@@ -18944,6 +18944,7 @@ MonoBehaviour:
   fireextinguisher: {fileID: 0}
   eleText: {fileID: 0}
   eleText1: {fileID: 0}
+  eletextpoint: 0
 --- !u!81 &1871371287
 AudioListener:
   m_ObjectHideFlags: 0
