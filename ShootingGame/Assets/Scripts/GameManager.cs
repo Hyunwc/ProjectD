@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -18,8 +17,13 @@ public class GameManager : MonoBehaviour
     public bool isQuest4Complete = false;
     public bool isQuest5Complete = false;
 
+  
     public bool bellCheck = false;
     public Text timeText;
+
+    public GameObject[] goldStar;
+    public GameObject[] silverStar;
+    public int CompleteCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +57,18 @@ public class GameManager : MonoBehaviour
         }
 
         timeUp();
+
+        ActiveStar();
     }
 
+    void ActiveStar()
+    {
+        for(int i = 0; i < CompleteCount; i++)
+        {
+            silverStar[i].SetActive(false);
+            goldStar[i].SetActive(true);
+        }
+    }
     IEnumerator GameScene()
     {
         while (true)

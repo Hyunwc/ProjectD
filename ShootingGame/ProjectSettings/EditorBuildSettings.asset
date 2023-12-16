@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/tunnel.unity
+    guid: 5c2d4e54979f8284fb844d549ac96dce
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
