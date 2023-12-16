@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
     public bool isReload = false; //재장전중인지 재장전중이면 true
     //public GameObject waterGunPanel;
     public Text bulletCountText; //총알수 표시
-
+   
     public bool isGun = false;
     public bool isFireEx = false;
     public bool isWaterPaper = false;
@@ -166,6 +166,8 @@ public class PlayerMove : MonoBehaviour
                 Debug.Log("현재 총알수 : " + gunCount);
             }
         }
+
+        
         else if (Input.GetMouseButtonDown(1) && isWaterPaper) // 오른쪽 마우스 버튼을 눌렀을 때
         {
             plymp.isWater = !plymp.isWater;
@@ -188,6 +190,12 @@ public class PlayerMove : MonoBehaviour
         {
             Reload();
         }
+
+        //if (gunCount == 0)
+        //{
+        //    bulletCountText.text = "WaterGun\n현재 총알 : 없음\n재장전 요망(R)";
+        //    Reload();
+        //}
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -309,6 +317,6 @@ public class PlayerMove : MonoBehaviour
 
     void UpdateBulletUI()
     {
-        bulletCountText.text = "Revolver\n현재 총알 : \n " + gunCount + "/ 10";
+        bulletCountText.text = "WaterGun\n현재 총알 : \n " + gunCount + " / 10";
     }
 }
