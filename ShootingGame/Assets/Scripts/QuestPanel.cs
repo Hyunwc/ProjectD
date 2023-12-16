@@ -57,6 +57,7 @@ public class QuestPanel : MonoBehaviour
             Questaudio.PlayOneShot(QuestSound);
             checkbox1.SetActive(true);
             gameManager.isQuest1Complete = true;
+            gameManager.CompleteCount++;
         }
         if (Fire.fireDestroy >= 10 && gameManager.isQuest2Complete == false) // Enemy Destroy 3 카운트되면 체크
         {
@@ -64,6 +65,7 @@ public class QuestPanel : MonoBehaviour
             Questaudio.PlayOneShot(QuestSound);
             checkbox2.SetActive(true);
             gameManager.isQuest2Complete = true;
+            gameManager.CompleteCount++;
         }
         if (Enemy.enemyDestroy >= 3 && gameManager.isQuest3Complete == false) // Enemy Destroy 3 카운트되면 체크
         {
@@ -71,12 +73,14 @@ public class QuestPanel : MonoBehaviour
             Questaudio.PlayOneShot(QuestSound);
             checkbox3.SetActive(true);
             gameManager.isQuest3Complete = true;
+            gameManager.CompleteCount++;
         }
         if ( elepoint >= 1 && gameManager.isQuest4Complete == false)
         {
             Questaudio.PlayOneShot(QuestSound);
             checkbox4.SetActive(true);
             gameManager.isQuest4Complete = true;
+            gameManager.CompleteCount++;
         }
         //if (actionController.hitInfo.transform.CompareTag("FireExt") && gameManager.isQuest5Complete == false)
         //{

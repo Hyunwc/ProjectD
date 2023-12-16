@@ -62,12 +62,14 @@ public class ClickManager : MonoBehaviour
         Enemy.enemyDestroy = 0;
         Fire.fireDestroy = 0;
     }
+    //√©≈Õ2 ¿ÁΩ√¿€
     public void Ch2ReStart()
     {
         clickaudio.PlayOneShot(clickSound);
         Time.timeScale = 1;
         SceneManager.LoadScene("tunnel");
     }
+    
     public void Quit()
     {
         clickaudio.PlayOneShot(clickSound);
