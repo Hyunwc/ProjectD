@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
     void Idle()
     {
         //플레이어와의 거리가 8 이하라면
-        if (distance <= 8)
+        if (distance <= 15)
         {
             Debug.Log("추적");
             //걷기 상태로
@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
     void Walk()
     {
         //8보다 크다면
-        if (distance > 8)
+        if (distance > 15)
         {
             Debug.Log("정지");
             eState = EnemyState.Idle;

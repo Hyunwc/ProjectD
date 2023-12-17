@@ -37,7 +37,7 @@ public class ClickManager : MonoBehaviour
         Cursor.visible = false; //마우스 커서 숨기기
         Cursor.lockState = CursorLockMode.Locked;   //마우스 커서가 게임 화면 못 벗어나게
     }
-
+    //로비
     public void ClickExit()
     {
         clickaudio.PlayOneShot(clickSound);
@@ -67,9 +67,17 @@ public class ClickManager : MonoBehaviour
     {
         clickaudio.PlayOneShot(clickSound);
         Time.timeScale = 1;
-        SceneManager.LoadScene("tunnel");
+        LoadingSceneContorller.LoadScene("tunnel");
+        //SceneManager.LoadScene("tunnel");
     }
-    
+    //엔딩씬
+    public void End()
+    {
+        clickaudio.PlayOneShot(clickSound);
+        Time.timeScale = 1;
+       
+        SceneManager.LoadScene("End");
+    }
     public void Quit()
     {
         clickaudio.PlayOneShot(clickSound);
@@ -83,6 +91,7 @@ public class ClickManager : MonoBehaviour
         subMenu.SetActive(true);
     }
 
+    //완전 종료
     public void GameExit()
     {
         clickaudio.PlayOneShot(clickSound);
