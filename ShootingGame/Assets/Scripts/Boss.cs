@@ -43,6 +43,7 @@ public class Boss : MonoBehaviour
     bool isAttacking = false;
     private Animator bossAni;
     public GameObject bulletSpawnPoint;
+   
     public void Damaged(float damage)
     {
         if(canMove)
@@ -65,7 +66,7 @@ public class Boss : MonoBehaviour
             {
                 bossState = BossState.Died;
                 Died();
-
+                
             }
         }
         
@@ -78,6 +79,7 @@ public class Boss : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         playerHp = FindObjectOfType<PlayerHp>();
         bossAni = GetComponent<Animator>();
+       
         //hpBar.maxValue = hp; // 슬라이더의 maxValue를 hp와 동일하게 설정
         //hpBar.value = 0; // 초기 체력을 0으로 설정
         //hp = 0;
@@ -161,7 +163,7 @@ public class Boss : MonoBehaviour
         bossAni.SetTrigger("Die");
         ExitCube.SetActive(false);
         //Destroy(gameObject);
-
+        
 
         //bossState = BossState.Died; // 보스의 상태를 사망 상태로 변경하거나 필요한 처리 수행
         //StopAllCoroutines(); // 모든 코루틴 중지 또는 필요한 작업 수행

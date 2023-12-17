@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/tunnel.unity
     guid: 5c2d4e54979f8284fb844d549ac96dce
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 199dce3ba9cead248a30afedcd6985dc
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

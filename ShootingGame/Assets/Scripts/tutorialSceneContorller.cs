@@ -12,7 +12,7 @@ public class tutorialSceneContorller : MonoBehaviour
     [SerializeField] private GameObject[] tutorialText;
 
     public int idx = 0;
-    private float delay = 5f;
+    private float delay = 4f;
     //플레이어 참조
     private PlayerMove ply;
     private TutoPlayer tply;

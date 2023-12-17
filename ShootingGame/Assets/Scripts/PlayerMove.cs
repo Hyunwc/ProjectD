@@ -39,10 +39,10 @@ public class PlayerMove : MonoBehaviour
     
     Rigidbody rb; //플레이어의 rigidbody 컴포넌트
     private CameraRotate rotateToMouse;
-    [SerializeField] private GameObject FirePanel;
+    //[SerializeField] private GameObject FirePanel;
     private NewInventory newInven;
-
-  
+    [SerializeField] private AudioClip reloadClip;
+    private AudioSource reloadSource;  
    
     void Start()
     {
@@ -55,7 +55,7 @@ public class PlayerMove : MonoBehaviour
         rotateToMouse = GetComponent<CameraRotate>();
         newInven = FindObjectOfType<NewInventory>();
         plymp = GetComponent<PlayerMp>();
-        
+        reloadSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -191,6 +191,12 @@ public class PlayerMove : MonoBehaviour
             Reload();
         }
 
+        if (gunCount == 0 && !isReload)
+        {
+            StartCoroutine(ReloadCoroutine());
+            isReload = true;
+        }
+
         //if (gunCount == 0)
         //{
         //    bulletCountText.text = "WaterGun\n현재 총알 : 없음\n재장전 요망(R)";
@@ -272,21 +278,7 @@ public class PlayerMove : MonoBehaviour
             jumpCount = 0;
             ManageMoveSound(isMoving);//발소리 사운드 메서드를 호출
         }
-
-        if (collision.gameObject.tag == "Fire")
-        {
-            FirePanel.SetActive(true);
-        }
     }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Fire"))
-        {
-            FirePanel.SetActive(false);
-        }
-    }
-
 
     //재장전
     public void Reload()
@@ -305,13 +297,13 @@ public class PlayerMove : MonoBehaviour
         isReload = true;
         bulletCountText.text = "장전 중...";
         yield return new WaitForSeconds(3f);
-        Debug.Log("총알 10발로 장전");
+        reloadSource.PlayOneShot(reloadClip);
         gunCount = 10;
         UpdateBulletUI(); // 장전 후에 UI 업데이트
-        Debug.Log("장전 후 총일 : " + gunCount);
+       
         // 코루틴이 실행되고 난 후에 isReload를 false로 설정하여 재장전이 끝났음을 표시합니다.
         isReload = false;
-        Debug.Log(isReload);
+        
         // 코루틴 종료
     }
 
