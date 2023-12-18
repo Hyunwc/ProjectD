@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.AI;
 public class ActionController : MonoBehaviour
 {
     [SerializeField] private float range;  // 아이템 습득이 가능한 최대 거리
@@ -40,11 +40,12 @@ public class ActionController : MonoBehaviour
     public FireEx fireEx;
 
     public bool fireExtFirst = false;
-
+    private NpcController npcController;
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         questPanel = FindObjectOfType<QuestPanel>();
+        npcController = FindObjectOfType<NpcController>();
     }
     void Update()
     {
@@ -217,6 +218,20 @@ public class ActionController : MonoBehaviour
                     //playerfire.enabled = false;
                     //cameraRotate.enabled = false;
 
+                }
+                //else if (hitInfo.transform.CompareTag("npc"))
+                //{
+                //    npcController.MoveToDestination();
+                //}
+                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                float rayDistance = 5.0f; // 이 값은 필요에 따라 조정해주세요.
+                RaycastHit[] hits = Physics.RaycastAll(ray, rayDistance);
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.transform.CompareTag("npc"))
+                    {
+                        hit.transform.GetComponent<NpcController>().MoveToDestination();
+                    }
                 }
             }
 
