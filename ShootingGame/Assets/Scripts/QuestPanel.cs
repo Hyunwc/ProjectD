@@ -16,7 +16,6 @@ public class QuestPanel : MonoBehaviour
      public GameObject checkbox3;
      public GameObject checkbox4;
     public GameObject checkbox5;
-
     private GameManager gameManager;
 
     public AudioClip QuestSound;
@@ -36,6 +35,10 @@ public class QuestPanel : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         actionController = FindObjectOfType<ActionController>();
 
+        gameManager.isQuest1Complete = false;
+        gameManager.isQuest2Complete = false;
+        gameManager.isQuest3Complete = false;
+
     }
 
     void Update()
@@ -43,50 +46,54 @@ public class QuestPanel : MonoBehaviour
         QuestText();
     }
 
+    private void QuestOn()
+    {
+        Questaudio.PlayOneShot(QuestSound);
+        gameManager.CompleteCount++;
+    }
+
     private void QuestText()
     {
         Quest1.text = " 화재경보기 누르기 ";
         Quest2.text = " 화재 진압하기 " + Fire.fireDestroy + " / 10 ";
-        Quest3.text = " 몬스터 제압하기 " + Enemy.enemyDestroy + " / 3 ";
-        Quest4.text = " 엘리베이터 탑승하지 않기 ";
+        Quest3.text = " 몬스터 제압하기 " + Enemy.enemyDestroy + " / 5 ";
+        Quest4.text = " 엘리베이터 상호작용 시도하기 ";
         Quest5.text = " 소화기 획득하기 ";
 
         if (gameManager.bellCheck == true && gameManager.isQuest1Complete == false)
         {
-            Quest1.text = "<color=#2FFF00>" + " 화재경보기 누르기 " + "</color>";
-            Questaudio.PlayOneShot(QuestSound);
+            QuestOn();
             checkbox1.SetActive(true);
             gameManager.isQuest1Complete = true;
-            gameManager.CompleteCount++;
         }
-        if (Fire.fireDestroy >= 10 && gameManager.isQuest2Complete == false) // Enemy Destroy 3 카운트되면 체크
+        if (Fire.fireDestroy >= 10 && gameManager.isQuest2Complete == false) //  카운트되면 체크
         {
-            Quest2.text = "<color=#2FFF00>" + " 화재 진압하기 10 / 10 " + "</color>";
-            Questaudio.PlayOneShot(QuestSound);
+            QuestOn();
             checkbox2.SetActive(true);
             gameManager.isQuest2Complete = true;
-            gameManager.CompleteCount++;
+            
         }
-        if (Enemy.enemyDestroy >= 3 && gameManager.isQuest3Complete == false) // Enemy Destroy 3 카운트되면 체크
+        if (Enemy.enemyDestroy >= 5 && gameManager.isQuest3Complete == false) // Enemy Destroy 3 카운트되면 체크
         {
-            Quest3.text = "<color=#2FFF00>" + " 몬스터 제압하기 3 / 3" + "</color>";
-            Questaudio.PlayOneShot(QuestSound);
+            QuestOn();
             checkbox3.SetActive(true);
             gameManager.isQuest3Complete = true;
-            gameManager.CompleteCount++;
+            
         }
         if ( elepoint >= 1 && gameManager.isQuest4Complete == false)
         {
-            Questaudio.PlayOneShot(QuestSound);
+            QuestOn();
             checkbox4.SetActive(true);
             gameManager.isQuest4Complete = true;
-            gameManager.CompleteCount++;
+            
         }
-        //if (actionController.hitInfo.transform.CompareTag("FireExt") && gameManager.isQuest5Complete == false)
-        //{
-        //    checkbox5.SetActive(true);
-        //    gameManager.isQuest5Complete = true;
-        //}
+        if (actionController.hitInfo.transform.CompareTag("FireExt") && gameManager.isQuest5Complete == false)
+        {
+            QuestOn();
+            checkbox5.SetActive(true);
+            gameManager.isQuest5Complete = true;
+            
+        }
         //if() 화재경보기 소리가 1번 울리면 체크, Fire 진압 10회 카운트 체크
 
     }

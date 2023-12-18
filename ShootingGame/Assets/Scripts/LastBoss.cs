@@ -43,6 +43,8 @@ public class LastBoss : MonoBehaviour
     private Animator bossAni;
     public GameObject bulletSpawnPoint;
     private LastManager last;
+
+    public bool bossDestroy = false;
     public void Damaged(float damage)
     {
         if (canMove)
@@ -63,6 +65,7 @@ public class LastBoss : MonoBehaviour
             }
             else
             {
+               
                 bossState = BossState.Died;
                 Died();
 
@@ -155,14 +158,16 @@ public class LastBoss : MonoBehaviour
             agent.isStopped = false; //이동시작
         }
     }
-    void Died()
+    public void Died()
     {
         //Debug.Log("보스 사망");
+        
         bossAni.SetBool("Walk Forward", false);
         bossAni.SetTrigger("Die");
         
         //Destroy(gameObject);
         last.lastbossDie = true;
+ 
 
         //bossState = BossState.Died; // 보스의 상태를 사망 상태로 변경하거나 필요한 처리 수행
         //StopAllCoroutines(); // 모든 코루틴 중지 또는 필요한 작업 수행

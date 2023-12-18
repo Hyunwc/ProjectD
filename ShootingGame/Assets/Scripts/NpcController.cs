@@ -10,7 +10,6 @@ public class NpcController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator npcAni;
 
-    public int NpcCount = 0;
     private C2Quest quest;
 
     void Start()
@@ -24,18 +23,19 @@ public class NpcController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+           
             MoveToDestination();
         }
-        else if (collision.gameObject.CompareTag("Exit"))
+        if (collision.gameObject.CompareTag("Exit"))
         {
-            quest.NpcCount++;
+            quest.npcCount--;
             gameObject.SetActive(false);
         }
     }
 
-    void MoveToDestination()
+     void MoveToDestination()
     {
-        if (targetDestination != null)
+    if (targetDestination != null)
         {
             navMeshAgent.SetDestination(targetDestination.position);
             npcAni.SetBool("isRun", true);

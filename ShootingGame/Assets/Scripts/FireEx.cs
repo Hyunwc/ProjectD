@@ -8,7 +8,7 @@ public class FireEx : MonoBehaviour
 {
     public ParticleSystem fireExPt;
     public Text capacityText; //소화기 용량
-    private float capacity = 100f; // 초기용량
+    public float capacity = 100f; // 초기용량
     private PlayerMove playM;
 
     public AudioSource launchSound; // 발사 소리

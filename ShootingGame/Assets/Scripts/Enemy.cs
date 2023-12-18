@@ -68,9 +68,10 @@ public class Enemy : MonoBehaviour
         {
             //tuto.DestroyMonster++;
             //eState = EnemyState.Dead;
+            enemyDestroy++;
             enemeManager.enemyObjects.Remove(gameObject);
             Destroy(gameObject);
-            enemyDestroy++;
+            Debug.Log("enemyDestroy : " + enemyDestroy);
 
         }
     }

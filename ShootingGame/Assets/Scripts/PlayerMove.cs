@@ -42,7 +42,9 @@ public class PlayerMove : MonoBehaviour
     //[SerializeField] private GameObject FirePanel;
     private NewInventory newInven;
     [SerializeField] private AudioClip reloadClip;
-    private AudioSource reloadSource;  
+    private AudioSource reloadSource;
+
+    public bool GetFireExt = false;
    
     void Start()
     {
@@ -118,7 +120,7 @@ public class PlayerMove : MonoBehaviour
             isWaterPaper = false;
             isMedi = false;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && GetFireExt == true)
         {
             newInven.ChangeSlot(1);
             gun.gameObject.SetActive(false);

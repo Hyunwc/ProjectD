@@ -19,7 +19,6 @@ public class ActionController : MonoBehaviour
     public GameObject FireExt2;
 
     public AudioClip firebellSound;
-    private AudioSource itemAudio;
 
     [SerializeField] private PlayerMove playerMove;  // PlayerMove
     [SerializeField] private PlayerFire playerfire;  // PlayerFire
@@ -28,18 +27,22 @@ public class ActionController : MonoBehaviour
     [SerializeField] private Text FireExtText2;  // 패널 텍스트 2
     [SerializeField] private Text FireExtText3;  // 패널 텍스트 3
     [SerializeField] private Text FireExtText4;  // 패널 텍스트 4 (임의)
-    [SerializeField] private GameObject fireextinguisher;  // 패널 텍스트 
+
+    public GameObject CheckText;
 
     public GameObject eleText; //elevator text
     public Text eleText1;
-    public int eletextpoint = 0;
+    public bool eletextpoint = false;
+    public GameObject Fail;
+
 
     private QuestPanel questPanel;
+    public FireEx fireEx;
 
+    public bool fireExtFirst = false;
 
     private void Start()
     {
-        itemAudio = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManager>();
         questPanel = FindObjectOfType<QuestPanel>();
     }
@@ -50,50 +53,38 @@ public class ActionController : MonoBehaviour
 
         if (eleText.activeSelf) //FIreExtPanel이 활성화된 상태에서만 F키를 입력받음 
         {
-            
-            if (Input.GetKeyDown(KeyCode.Alpha1) && eletextpoint == 0)
-            {
-                eletextpoint = 1;
-                eleText1.text = "화재 상황에선\n 엘리베이터를 탑승하면 안됩니다! " + "<color=yellow>" + " (X) " + "</color>";
 
-                if (eletextpoint ==1)
-                    Invoke("DeactivateEleText", 3f);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && eletextpoint == 0)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && eletextpoint == true)
             {
-                eletextpoint =2;
+                eleText1.text = "화재 상황에선\n 엘리베이터를 탑승하면 안됩니다!";
+                Fail.SetActive(true);
+                Invoke("DeactivateEleText", 3f);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && eletextpoint == true)
+            {
                 questPanel.elepoint++;
                 eleText.SetActive(false);
             }
-        } 
- 
+        }
+
         if (FireExtPanel.activeSelf) //FIreExtPanel이 활성화된 상태에서만 F키를 입력받음 
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyUp(KeyCode.F))
             {
-                DisappearPanel();
-                fireextinguisher.SetActive(true);
-            }
+                CheckText.SetActive(true);
+            } if (Input.GetKeyDown(KeyCode.F) && CheckText.activeSelf)
+        {
+                Invoke("DisappearPanel", 1f);
         }
+        }
+        
     }
 
-
+  
     void DeactivateEleText()
     {
         eleText.SetActive(false);
     }
-
-    
-    /*private void PlayMode()
-    {
-        actionText.enabled = true;
-
-        Cursor.visible = false;
-
-            playerMove.enabled = true;
-            playerfire.enabled = true;
-
-    } */
 
     private void DisappearPanel()
     {
@@ -104,6 +95,10 @@ public class ActionController : MonoBehaviour
         if (FireExt2 != null)
         {
             FireExt2.SetActive(false);
+        }
+        if(CheckText != null)
+        {
+            CheckText.SetActive(false);
         }
     }
 
@@ -164,9 +159,9 @@ public class ActionController : MonoBehaviour
             {
                 Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득 했습니다."); // 인벤토리 넣기
 
-                if(hitInfo.transform.CompareTag("ele"))
+                if(hitInfo.transform.CompareTag("ele") && eletextpoint == false)
                 {
-                    eletextpoint = 0;
+                    eletextpoint = true;
                     eleText.SetActive(true);
                     eleText1.text = "엘리베이터를 탑승하시겠습니까 ?\n1. 타고 내려간다                2. 타지 않는다";
                 }
@@ -193,26 +188,38 @@ public class ActionController : MonoBehaviour
                     Destroy(hitInfo.transform.gameObject);
                     Medicine.mediCount++;
                 }
-                else if (hitInfo.transform.CompareTag("FireExt")) // FireExt를 받았을 때 소화기 사용 패널 팝업
+                else if (hitInfo.transform.CompareTag("FireExt") ) // FireExt를 받았을 때 소화기 사용 패널 팝업
                 {
-                    actionText.enabled = false; // 텍스트 숨기기
-                    FireExtPanel.SetActive(true);
-                    FireExt2.SetActive(true);
+                    //actionText.enabled = false; // 텍스트 숨기기
+                    
+                    fireEx.capacity = 100f;
+                    fireEx.capacityText.text = "소화기\n현재 용량\n" + fireEx.capacity + "%";
+                    Destroy(hitInfo.transform.gameObject);
 
-                    FireExtText1.text = "1. 소화기의 몸체를 단단히 잡고 고정시킨 뒤, 안전핀을 뽑는다.";
-                    FireExtText2.text = "2. 바람을 등지고 소화기의 호스를 불 쪽으로 향하게 잡는다.";
-                    FireExtText3.text = "3. 발화지점을 향해 손잡이를 누른다. 분사 방향은 위에서 아래로 15도 각도를 유지한다.";
-                    FireExtText4.text = "위 단계를 순차적으로 진행했다면 " + "<color=yellow>" + "(F)" + "</color>" + " 버튼을 누르세요."; //임의
+                    if (fireExtFirst == false)
+                    {
+                        fireExtFirst = true;
+                        playerMove.GetFireExt = true;
 
-                    Cursor.lockState = CursorLockMode.None;  // 커서 잠금 해제 
-                    Cursor.visible = true; // 커서 보이게
+                        FireExtPanel.SetActive(true);
+                        FireExt2.SetActive(true);
+
+                        FireExtText1.text = "1. 소화기의 몸체를 단단히 잡고 고정시킨 뒤, 안전핀을 뽑는다.";
+                        FireExtText2.text = "2. 바람을 등지고 소화기의 호스를 불 쪽으로 향하게 잡는다.";
+                        FireExtText3.text = "3. 발화지점을 향해 손잡이를 누른다. 분사 방향은 위에서 아래로 15도 각도를 유지한다.";
+                        FireExtText4.text = "소화기 사용법을 이해했다면\n" + "<color=yellow>" + "(F)" + "</color>" + " 버튼을 눌러 창을 닫아주세요."; //임의
+
+
+                    }
+                    //Cursor.lockState = CursorLockMode.None;  // 커서 잠금 해제 
+                    //Cursor.visible = true; // 커서 보이게
                     //playerMove.enabled = false; // 플레이어 조작 비활성화
                     //playerfire.enabled = false;
                     //cameraRotate.enabled = false;
-                    Destroy(hitInfo.transform.gameObject);
+
                 }
+            }
 
             }
         }
     }
-}

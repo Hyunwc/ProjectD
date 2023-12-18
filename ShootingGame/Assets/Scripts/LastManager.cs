@@ -49,6 +49,7 @@ public class LastManager : MonoBehaviour
 
         if (lastbossDie)
         {
+            
             StartCoroutine(ShowVictoryPanelAfterDelay(8.0f));
         }
 
