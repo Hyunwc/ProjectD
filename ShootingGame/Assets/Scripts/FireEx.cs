@@ -34,20 +34,9 @@ public class FireEx : MonoBehaviour
  
         fireExPt.Play();
         FireTrigger.SetActive(true);
-        //fireExaudio.Play();
-        //Debug.Log("Playing sound: " + fireExaudio.isPlaying);
+        
         isPlayingSound = true;
         StartCoroutine(StopParticleAfterShot());
-
-        //if (!isPlayingSound)
-        //{
-        //    if (launchSound.clip != null)
-        //    {
-        //        //launchSound.Play();
-        //        isPlayingSound = true;
-        //    }
-        //}
-
     }
     IEnumerator StopParticleAfterShot()
     {
@@ -59,7 +48,7 @@ public class FireEx : MonoBehaviour
 
             if (isMousePressed)
             {
-                capacity -= 0.001f;
+                capacity -= 0.0001f;
                 capacityText.text = "소화기\n현재 용량\n" + capacity.ToString("F1") + "%"; //용량 갱신
                 if (!launchSound.isPlaying && capacity > 0)
                 {

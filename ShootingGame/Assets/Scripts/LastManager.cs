@@ -38,21 +38,15 @@ public class LastManager : MonoBehaviour
         {
             ply.isMove = true;
             ply.isShot = true;
-        }
-
-        switch (idx)
-        {
-            case 2:
-                StartCoroutine(DisablePanelAfterDelay(5f));
-                break;
+            StartCoroutine(DisablePanelAfterDelay(5f));
         }
 
         if (lastbossDie)
-        {
-            
+        { 
             StartCoroutine(ShowVictoryPanelAfterDelay(8.0f));
         }
 
+        ActiveStar();
     }
 
     IEnumerator GameScene()
@@ -84,7 +78,7 @@ public class LastManager : MonoBehaviour
                 yield return null;
             }
         }
-        ActiveStar();
+        
     }
 
     void ActiveStar()
