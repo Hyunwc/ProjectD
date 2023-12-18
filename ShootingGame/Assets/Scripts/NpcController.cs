@@ -21,11 +21,11 @@ public class NpcController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
+        //if (collision.gameObject.CompareTag("Player"))
+        //{
            
-            MoveToDestination();
-        }
+        //    MoveToDestination();
+        //}
         if (collision.gameObject.CompareTag("Exit"))
         {
             quest.npcCount--;
@@ -33,7 +33,7 @@ public class NpcController : MonoBehaviour
         }
     }
 
-     void MoveToDestination()
+     public void MoveToDestination()
     {
     if (targetDestination != null)
         {

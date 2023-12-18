@@ -44,7 +44,8 @@ public class LastBoss : MonoBehaviour
     public GameObject bulletSpawnPoint;
     private LastManager last;
 
-    public bool bossDestroy = false;
+    //public bool bossDestroy = false;
+    private C2Quest c2q;
     public void Damaged(float damage)
     {
         if (canMove)
@@ -82,6 +83,7 @@ public class LastBoss : MonoBehaviour
         playerHp = FindObjectOfType<PlayerHp>();
         bossAni = GetComponent<Animator>();
         last = FindObjectOfType<LastManager>();
+        c2q = FindObjectOfType<C2Quest>();
         //hpBar.maxValue = hp; // 슬라이더의 maxValue를 hp와 동일하게 설정
         //hpBar.value = 0; // 초기 체력을 0으로 설정
         //hp = 0;
@@ -161,13 +163,14 @@ public class LastBoss : MonoBehaviour
     public void Died()
     {
         //Debug.Log("보스 사망");
-        
+        c2q.bossDestroy = true;
         bossAni.SetBool("Walk Forward", false);
         bossAni.SetTrigger("Die");
         
         //Destroy(gameObject);
         last.lastbossDie = true;
- 
+        
+
 
         //bossState = BossState.Died; // 보스의 상태를 사망 상태로 변경하거나 필요한 처리 수행
         //StopAllCoroutines(); // 모든 코루틴 중지 또는 필요한 작업 수행

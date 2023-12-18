@@ -35,6 +35,7 @@ public class C2Quest : MonoBehaviour
     bool isQuest2Complete = false;
     bool isQuest3Complete = false;
 
+    public bool bossDestroy = false;
 
     void Start()
     {
@@ -74,15 +75,13 @@ public class C2Quest : MonoBehaviour
             checkbox2.SetActive(true);
             isQuest2Complete = true;
         }
-        if (last.bossDestroy == true && isQuest3Complete == false)
+        if (bossDestroy == true && isQuest3Complete == false)
         {
             Questaudio.PlayOneShot(QuestSound);
             lastManager.CompleteCount++;
             checkbox3.SetActive(true);
             isQuest3Complete = true;
         }
-
-
 
     }
 }
