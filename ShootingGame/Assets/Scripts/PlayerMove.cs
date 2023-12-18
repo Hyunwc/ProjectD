@@ -41,8 +41,7 @@ public class PlayerMove : MonoBehaviour
     private CameraRotate rotateToMouse;
     //[SerializeField] private GameObject FirePanel;
     private NewInventory newInven;
-    [SerializeField] private AudioClip reloadClip;
-    private AudioSource reloadSource;
+   
 
     public bool GetFireExt = false;
    
@@ -57,7 +56,8 @@ public class PlayerMove : MonoBehaviour
         rotateToMouse = GetComponent<CameraRotate>();
         newInven = FindObjectOfType<NewInventory>();
         plymp = GetComponent<PlayerMp>();
-        reloadSource = GetComponent<AudioSource>();
+        //reloadSource = GetComponent<AudioSource>();
+      
     }
 
     // Update is called once per frame
@@ -299,7 +299,8 @@ public class PlayerMove : MonoBehaviour
         isReload = true;
         bulletCountText.text = "장전 중...";
         yield return new WaitForSeconds(3f);
-        reloadSource.PlayOneShot(reloadClip);
+        gun.ReLoadSound();
+        
         gunCount = 10;
         UpdateBulletUI(); // 장전 후에 UI 업데이트
        
