@@ -25,7 +25,7 @@ public class tutorialSceneContorller : MonoBehaviour
     public AudioClip QuestSound;
     private AudioSource Questaudio;
 
-    public Text timeText;
+    //public Text timeText;
     private void Start()
     {
         ply = FindObjectOfType<PlayerMove>();
@@ -37,7 +37,7 @@ public class tutorialSceneContorller : MonoBehaviour
         tutorialText[idx].SetActive(true);
         Questaudio = GetComponent<AudioSource>();
         StartCoroutine(TutorialStart());
-        timeText.text = "00:00";
+        //timeText.text = "00:00";
     }
     private void Update()
     {
@@ -127,19 +127,19 @@ public class tutorialSceneContorller : MonoBehaviour
         if(DestroyMonster == 3)
             lastDoor.SetActive(false);
 
-        timeUp();
+        //timeUp();
     }
-    private void timeUp()
-    {
-        float timeSinceStart = Time.time;
+    //private void timeUp()
+    //{
+    //    float timeSinceStart = Time.time;
 
-        // 경과 시간을 시간/분으로 변환합니다.
-        int minutes = Mathf.FloorToInt(timeSinceStart / 60F);
-        int seconds = Mathf.FloorToInt(timeSinceStart - minutes * 60);
+    //    // 경과 시간을 시간/분으로 변환합니다.
+    //    int minutes = Mathf.FloorToInt(timeSinceStart / 60F);
+    //    int seconds = Mathf.FloorToInt(timeSinceStart - minutes * 60);
 
-        // 변환된 시간을 표시합니다.
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
+    //    // 변환된 시간을 표시합니다.
+    //    timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    //}
 
     IEnumerator TutorialStart()
     {

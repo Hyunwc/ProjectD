@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
   
     public bool bellCheck = false;
-    public Text timeText;
+    //public Text timeText;
 
     public GameObject[] goldStar;
     public GameObject[] silverStar;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         ply.isShot = false;
         gameText[idx].SetActive(true);
         StartCoroutine(GameScene());
-        timeText.text = "00:00";
+        //timeText.text = "00:00";
     }
 
     // Update is called once per frame
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        timeUp();
+        //timeUp();
 
         ActiveStar();
     }
@@ -104,16 +104,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void timeUp()
-    {
-        float timeSinceStart = Time.time;
+    //private void timeUp()
+    //{
+    //    float timeSinceStart = Time.time;
 
-        // 경과 시간을 시간/분으로 변환합니다.
-        int minutes = Mathf.FloorToInt(timeSinceStart / 60F);
-        int seconds = Mathf.FloorToInt(timeSinceStart - minutes * 60);
+    //    // 경과 시간을 시간/분으로 변환합니다.
+    //    int minutes = Mathf.FloorToInt(timeSinceStart / 60F);
+    //    int seconds = Mathf.FloorToInt(timeSinceStart - minutes * 60);
 
-        // 변환된 시간을 표시합니다.
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
+    //    // 변환된 시간을 표시합니다.
+    //    timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    //}
 
 }
