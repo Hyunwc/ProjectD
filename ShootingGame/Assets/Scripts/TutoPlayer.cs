@@ -289,6 +289,7 @@ public class TutoPlayer : MonoBehaviour
         bulletCountText.text = "장전 중...";
         yield return new WaitForSeconds(3f);
         Debug.Log("총알 10발로 장전");
+        gun.ReLoadSound();
         gunCount = 10;
         UpdateBulletUI(); // 장전 후에 UI 업데이트
         Debug.Log("장전 후 총일 : " + gunCount);
@@ -300,6 +301,6 @@ public class TutoPlayer : MonoBehaviour
 
     void UpdateBulletUI()
     {
-        bulletCountText.text = "Revolver\n현재 총알 : \n " + gunCount + "/ 10";
+        bulletCountText.text = "WaterGun\n현재 총알 : \n " + gunCount + " / 10";
     }
 }
