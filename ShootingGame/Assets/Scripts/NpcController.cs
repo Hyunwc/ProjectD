@@ -12,11 +12,14 @@ public class NpcController : MonoBehaviour
 
     private C2Quest quest;
 
+    private AudioSource audioSource; // AudioSource 참조 추가
+    public AudioClip thankYouClip;
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         npcAni = GetComponent<Animator>();
         quest = FindObjectOfType<C2Quest>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -39,6 +42,9 @@ public class NpcController : MonoBehaviour
         {
             navMeshAgent.SetDestination(targetDestination.position);
             npcAni.SetBool("isRun", true);
+
+            audioSource.clip = thankYouClip; // 음성클립 설정
+            audioSource.Play();
         }
     }
 }
