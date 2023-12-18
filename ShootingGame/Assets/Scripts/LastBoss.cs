@@ -65,7 +65,7 @@ public class LastBoss : MonoBehaviour
             }
             else
             {
-               
+                bossDestroy = true;
                 bossState = BossState.Died;
                 Died();
 

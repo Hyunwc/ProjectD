@@ -19,26 +19,29 @@ public class NpcController : MonoBehaviour
         quest = FindObjectOfType<C2Quest>();
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-           
             MoveToDestination();
         }
         if (collision.gameObject.CompareTag("Exit"))
         {
-            quest.npcCount--;
+            //quest.npcCount--;
             gameObject.SetActive(false);
         }
     }
 
-     void MoveToDestination()
+     public void MoveToDestination()
     {
     if (targetDestination != null)
         {
+            quest.npcCount--;
             navMeshAgent.SetDestination(targetDestination.position);
             npcAni.SetBool("isRun", true);
         }
+
     }
+
+
 }

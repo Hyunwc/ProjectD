@@ -74,7 +74,7 @@ public class C2Quest : MonoBehaviour
             checkbox2.SetActive(true);
             isQuest2Complete = true;
         }
-        if (last.bossDestroy == true && isQuest3Complete == false)
+        if (lastManager.lastbossDie == true && isQuest3Complete == false)
         {
             Questaudio.PlayOneShot(QuestSound);
             lastManager.CompleteCount++;

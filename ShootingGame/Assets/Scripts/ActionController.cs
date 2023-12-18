@@ -41,10 +41,14 @@ public class ActionController : MonoBehaviour
 
     public bool fireExtFirst = false;
 
+    Collision collision;
+    private NpcController npcController;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         questPanel = FindObjectOfType<QuestPanel>();
+        npcController = FindObjectOfType<NpcController>();
     }
     void Update()
     {

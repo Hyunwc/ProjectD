@@ -12,6 +12,7 @@ public class LastBossSet : MonoBehaviour
     public GameObject bossHP;
     private PlayerMove ply;
     private SoundManager soundManager;
+    public bool last;
     private void Start()
     {
 
